@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  margin: 1em auto;
+  width: 60%;
+  min-width: 400px;
 }
 
 .App-logo {
@@ -29,4 +32,88 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.page-title {
+  font-size: 1.5em;
+}
+
+.faded-text {
+  color: #999999;
+}
+
+.welcome {
+  display: flex;
+  font-size: 0.7em;
+  justify-content: space-between;
+  margin: 1em 0;
+}
+
+.welcome-avatar {
+  width: 24px;
+  height: 24px;
+  margin: 4px;
+  margin-top: -8px;
+  vertical-align: middle;
+  border-radius: 10%;
+}
+
+.navigation {
+  font-size: 0.7em;
+  margin: 0.8em 0;
+}
+
+.card {
+  border: solid 1px #dddddd;
+  border-radius: 2px;
+  padding: 1.5em;
+  box-shadow: 2px 2px 7px 0px rgba(200, 200, 200, 0.7 )
+}
+
+.poll {
+  padding: 0.5em;
+}
+
+.poll-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.question {
+  padding: 1em 0;
+  border-bottom: solid 1px #eeeeee;
+}
+
+.question:last-child {
+  border-bottom: none;
+}
+
+.option-checkbox {
+  font-size: 1.5em;
+  margin-top: -4px;
+  padding-right: 8px;
+  vertical-align: middle;
+}
+
+.option-checkbox.checked {
+  color: #1dae5f;
+}
+
+.btnFilter {
+  all: unset;
+  color: #999999;
+  text-decoration: none;
+  cursor: default;
+}
+
+.btnFilter.active {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.logout {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
 }

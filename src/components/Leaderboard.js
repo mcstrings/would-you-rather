@@ -24,11 +24,6 @@ class Leaderboard extends Component {
         const { users } = this.props
         // Users are ordered in descending order based on the sum of the number of questions they’ve answered and the number of questions they’ve asked.
 
-        getArrayFromObj(users).map((user) => {
-            const sum = this.getNumCreated(user) + this.getNumAnswered(user)
-            console.log('sum', sum)
-        })
-
         const sorted = getArrayFromObj(users).sort((a, b) => {
             const sum_a = this.getNumCreated(a) + this.getNumAnswered(a)
             const sum_b = this.getNumCreated(b) + this.getNumAnswered(b)
@@ -36,12 +31,11 @@ class Leaderboard extends Component {
             return sum_b - sum_a
         })
 
-        console.log('sorted', sorted)
         return sorted
     }
 
     render() {
-        const { authedUser, authedUserID, users, questions } = this.props
+        const { authedUserID } = this.props
 
         return (
             <ul className="leaderboard-user">
@@ -51,7 +45,7 @@ class Leaderboard extends Component {
                         className={authedUserID === user.id ? 'currentUser' : ''}
                     >
                         <Avatar className="leaderboard-avatar" user={user} />
-                        <div class="username">{getUserName(user)}</div>
+                        <div className="username">{getUserName(user)}</div>
                         <div className="asked">
                             {this.getNumCreated(user)} asked
                         </div>
@@ -65,12 +59,10 @@ class Leaderboard extends Component {
     }
 }
 
-const mapStateToProps = ({ authedUser, users, questions }) => {
+const mapStateToProps = ({ authedUser, users }) => {
     return {
         authedUserID: authedUser,
-        authedUser: getUser(authedUser, users),
-        users,
-        questions
+        users
     }
 }
 

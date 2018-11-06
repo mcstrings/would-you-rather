@@ -1,29 +1,28 @@
 import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { setAuthedUser } from '../actions/authedUser'
+import { getArrayFromObj } from '../utils'
 
 class Login extends Component {
-    state = {
-
-    }
 
     handleSelectUserChange = (e) => {
-        this.setState({
-            authedUserID: e.target.value
-        })
+        const { dispatch } = this.props
+        dispatch(setAuthedUser(e.target.value))
     }
 
     render() {
-        const { authedUserID, users, getUsersArray, handleSelectUserChange } = this.props
+        const { authedUserID, users } = this.props
 
         return (
             <Fragment>
                 <div>Login as</div>
                 <select
                     value={authedUserID}
-                    onChange={handleSelectUserChange}
+                    onChange={this.handleSelectUserChange}
                 >
                     <option value="">Select a user login</option>
                     {users &&
-                        getUsersArray().map((user) => (
+                        getArrayFromObj(users).map((user) => (
                             <option key={user.id} value={user.id}>
                                 {user.name}
                             </option>
@@ -34,4 +33,11 @@ class Login extends Component {
     }
 }
 
-export default Login
+function mapStateToProps({ authedUser, users }) {
+    return {
+        authedUserID: authedUser,
+        users
+    }
+}
+
+export default connect(mapStateToProps)(Login)

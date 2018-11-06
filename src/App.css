@@ -1,119 +1,170 @@
 .App {
-  text-align: center;
-  margin: 1em auto;
-  width: 60%;
-  min-width: 400px;
+    text-align: center;
+    margin: 1em auto;
+    width: 60%;
+    min-width: 400px;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .page-title {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 .faded-text {
-  color: #999999;
+    color: #999999;
 }
 
 .welcome {
-  display: flex;
-  font-size: 0.7em;
-  justify-content: space-between;
-  margin: 1em 0;
+    display: flex;
+    font-size: 0.7em;
+    justify-content: space-between;
+    margin: 1em 0;
 }
 
 .welcome-avatar {
-  width: 24px;
-  height: 24px;
-  margin: 4px;
-  margin-top: -8px;
-  vertical-align: middle;
-  border-radius: 10%;
+    width: 24px;
+    height: 24px;
+    margin: 4px;
+    margin-top: -8px;
+    vertical-align: middle;
+    border-radius: 10%;
 }
 
 .navigation {
-  font-size: 0.7em;
-  margin: 0.8em 0;
+    font-size: 0.7em;
+    margin: 0.8em 0;
 }
 
 .card {
-  border: solid 1px #dddddd;
-  border-radius: 2px;
-  padding: 1.5em;
-  box-shadow: 2px 2px 7px 0px rgba(200, 200, 200, 0.7 )
+    border: solid 1px #dddddd;
+    border-radius: 2px;
+    padding: 1.5em;
+    box-shadow: 2px 2px 7px 0px rgba(200, 200, 200, 0.7);
 }
 
 .poll {
-  padding: 0.5em;
+    padding: 0.5em;
 }
 
 .poll-title {
-  font-size: 1.2em;
-  font-weight: bold;
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .question {
-  padding: 1em 0;
-  border-bottom: solid 1px #eeeeee;
+    padding: 1em 0;
+    border-bottom: solid 1px #eeeeee;
 }
 
 .question:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 .option-checkbox {
-  font-size: 1.5em;
-  margin-top: -4px;
-  padding-right: 8px;
-  vertical-align: middle;
+    font-size: 1.5em;
+    margin-top: -4px;
+    padding-right: 8px;
+    vertical-align: middle;
 }
 
 .option-checkbox.checked {
-  color: #1dae5f;
+    color: #1dae5f;
 }
 
 .btnFilter {
-  all: unset;
-  color: #999999;
-  text-decoration: none;
-  cursor: default;
+    all: unset;
+    color: #999999;
+    text-decoration: none;
+    cursor: default;
 }
 
 .btnFilter.active {
-  color: blue;
-  text-decoration: underline;
-  cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .logout {
-  color: blue;
-  cursor: pointer;
-  text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.leaderboard-user {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.leaderboard-user li {
+    border-radius: 6px;
+    color: #999999;
+    display: grid;
+    margin-bottom: 2em;
+    padding: 0.4em;
+    grid-template-columns: 74px 1fr 1fr 1fr 1fr;
+    grid-template-rows: 50% auto;
+
+    grid-template-areas:
+        'avatar username username username username'
+        'avatar asked answered answered answered';
+}
+
+.leaderboard-user li.currentUser {
+    border: solid 3px #1dae5f69;
+    box-shadow: 2px 2px 8px rgba(180, 180, 180, 0.5);
+}
+
+.leaderboard-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 1em;
+
+    grid-area: avatar;
+}
+
+.leaderboard-user .username {
+    color: #333333;
+    font-size: 1.6em;
+    grid-area: username;
+}
+
+.asked {
+    grid-area: asked;
+}
+
+.answered {
+    grid-area: answered;
 }

@@ -3,30 +3,17 @@ import { connect } from 'react-redux'
 import { getUser, getUserName, getArrayFromObj } from '../utils'
 import Avatar from './Avatar'
 
-// The Leaderboard is available at/leaderboard.
-// Each entry on the leaderboard contains the following:
-// the user’s name;
-// the user’s picture;
-// the number of questions the user asked; and
-// the number of questions the user answered.
-// Users are ordered in descending order based on the sum of the number of questions they’ve answered and the number of questions they’ve asked.
-
 class Leaderboard extends Component {
-    getNumCreated = (user) => {
-        return user.questions.length
-    }
-
-    getNumAnswered = (user) => {
-        return getArrayFromObj(user.answers).length
-    }
+    getNumCreated = (user) => user.questions.length
+    getNumAnswered = (user) => getArrayFromObj(user.answers).length
+    getSum = (u) => this.getNumCreated(u) + this.getNumAnswered(u)
 
     sortUsersByNumQuestions = () => {
         const { users } = this.props
         // Users are ordered in descending order based on the sum of the number of questions they’ve answered and the number of questions they’ve asked.
-
         const sorted = getArrayFromObj(users).sort((a, b) => {
-            const sum_a = this.getNumCreated(a) + this.getNumAnswered(a)
-            const sum_b = this.getNumCreated(b) + this.getNumAnswered(b)
+            const sum_a = this.getSum(a)
+            const sum_b = this.getSum(b)
 
             return sum_b - sum_a
         })
@@ -42,7 +29,9 @@ class Leaderboard extends Component {
                 {this.sortUsersByNumQuestions().map((user) => (
                     <li
                         key={user.id}
-                        className={authedUserID === user.id ? 'currentUser' : ''}
+                        className={
+                            authedUserID === user.id ? 'currentUser' : ''
+                        }
                     >
                         <Avatar className="leaderboard-avatar" user={user} />
                         <div className="username">{getUserName(user)}</div>

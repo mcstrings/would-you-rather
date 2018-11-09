@@ -118,6 +118,18 @@
     text-decoration: underline;
 }
 
+.question-detail-avatar {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    vertical-align: middle;    
+    margin-right: 0.8em;
+}
+
+.question-detail-username {
+    font-size: 1.5em;
+}
+
 .leaderboard-user {
     list-style: none;
     padding: 0;

@@ -68,6 +68,7 @@ class Questions extends Component {
                             key={question.id}
                             question={question}
                             hasAuthedUserAnswered={this.hasAuthedUserAnswered}
+                            onClick={this.handleQuestionClick}
                         />
                     ))}
             </div>

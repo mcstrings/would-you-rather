@@ -8,6 +8,9 @@ import Welcome from './Welcome'
 import Navigation from './Navigation'
 import Questions from './Questions'
 import Leaderboard from './Leaderboard'
+import QuestionDetail from './QuestionDetail'
+import CreateQuestion from './CreateQuestion'
+import { Route, Link } from 'react-router-dom'
 
 class App extends Component {
     componentDidMount() {
@@ -18,11 +21,13 @@ class App extends Component {
         return (
             <div className="App">
                 <div className="page-title">Would you rather?</div>
-                <Login />
+                <Route path="/" exact component={Login} />
                 <Welcome />
                 <Navigation />
                 <Questions />
-                <Leaderboard />
+
+                <Route path="/question-detail" component={QuestionDetail} />
+                <Route path="/leaderboard" component={Leaderboard} />
             </div>
         )
     }

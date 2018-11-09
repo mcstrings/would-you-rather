@@ -12,11 +12,15 @@ export default class Question extends Component {
         )
     }
 
+    handleQuestionClick = (e, questionID) => {
+        console.log('handleQuestionClick', questionID, e)
+    }
+
     render() {
         const { question } = this.props
 
         return (
-            <div className="question" key={question.id}>
+            <div className="question" key={question.id} onClick={(e) =>  this.handleQuestionClick(e, question.id)}>
                 <div>
                     {this.getOptionCheckbox(question.optionOne)}
                     {question.optionOne.text}

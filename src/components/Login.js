@@ -1,28 +1,31 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
-import { getArrayFromObj } from '../utils'
-import { Col, Row } from 'react-bootstrap'
+import { getArrayFromObj, getUser } from '../utils'
+import { Col, Row, DropdownButton, Dropdown } from 'react-bootstrap'
 
 class Login extends Component {
-    handleSelectUserChange = (e) => {
+    handleSelectUserChange = (value, e) => {
         const { dispatch } = this.props
-        dispatch(setAuthedUser(e.target.value))
+        dispatch(setAuthedUser(value))
     }
 
     render() {
-        const { authedUserID, users } = this.props
+        const { authedUserID, users, user } = this.props
+
+        const title = user ? user.name : "Select a user"
 
         return (
             <Row className="pb-3">
                 <Col>
                     <div>Login as</div>
-                    <select
+
+                    <DropdownButton
+                        id="dropdown-users"
                         value={authedUserID}
-                        onChange={this.handleSelectUserChange}
+                        title={title}
+                        onSelect={this.handleSelectUserChange}
                     >
-                        {/* Sort users alphabetically */}
-                        <option value="">Select a user login</option>
                         {users &&
                             getArrayFromObj(users)
                                 .sort((a, b) => {
@@ -31,15 +34,18 @@ class Login extends Component {
                                     return nameA < nameB
                                         ? -1
                                         : nameA > nameB
-                                            ? 1
-                                            : 0
+                                        ? 1
+                                        : 0
                                 })
                                 .map((user) => (
-                                    <option key={user.id} value={user.id}>
+                                    <Dropdown.Item
+                                        key={user.id}
+                                        eventKey={user.id}
+                                    >
                                         {user.name}
-                                    </option>
+                                    </Dropdown.Item>
                                 ))}
-                    </select>
+                    </DropdownButton>
                 </Col>
             </Row>
         )
@@ -49,6 +55,7 @@ class Login extends Component {
 function mapStateToProps({ authedUser, users }) {
     return {
         authedUserID: authedUser,
+        user: getUser(authedUser, users),
         users
     }
 }

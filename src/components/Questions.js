@@ -2,10 +2,25 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
 import { getArrayFromObj } from '../utils'
+import {
+    Badge,
+    Card,
+    ListGroup,
+    ToggleButtonGroup,
+    ToggleButton
+} from 'react-bootstrap'
 
 class Questions extends Component {
+    constructor(props) {
+        super(props)
+
+        this.handleFilterChange = this.handleFilterChange.bind(this)
+    }
+
     state = {
-        showAnswered: false
+        showAnswered: false,
+        answered: null,
+        unanswered: null
     }
 
     getFilteredQuestions = (showAnswered = false) => {
@@ -26,9 +41,9 @@ class Questions extends Component {
         return option.votes.includes(authedUserID)
     }
 
-    handleFilterClick = (e, showAnswered) => {
+    handleFilterChange = (value, e) => {
         this.setState({
-            showAnswered
+            showAnswered: value ? false : true // relying on truthiness
         })
     }
 
@@ -36,42 +51,52 @@ class Questions extends Component {
         const { questions } = this.props
         const { showAnswered } = this.state
 
+        const answered = this.getFilteredQuestions(true)
+        const unanswered = this.getFilteredQuestions(false)
+
         return (
-            <div className="poll card">
-                <div className="poll-title">Questions</div>
-                <div className="navigation">
-                    <button
-                        onClick={(e) => this.handleFilterClick(e, false)}
-                        value="1"
-                        className={
-                            'btnFilter' +
-                            (showAnswered ? ' active' : ' inactive')
-                        }
+            <Card>
+                <Card.Header>
+                    <Card.Title>
+                        Questions
+                    </Card.Title>
+
+                    <ToggleButtonGroup
+                        className="mb-1"
+                        name="toggleAnswered"
+                        value={showAnswered ? 0 : 1}
+                        defaultValue={1}
+                        onChange={this.handleFilterChange}
                     >
-                        Unanswered
-                    </button>{' '}
-                    |{' '}
-                    <button
-                        onClick={(e) => this.handleFilterClick(e, true)}
-                        value="0"
-                        className={
-                            'btnFilter' +
-                            (showAnswered ? ' inactive' : ' active')
-                        }
-                    >
-                        Answered
-                    </button>
-                </div>
-                {questions &&
-                    this.getFilteredQuestions(showAnswered).map((question) => (
-                        <Question
-                            key={question.id}
-                            question={question}
-                            hasAuthedUserAnswered={this.hasAuthedUserAnswered}
-                            onClick={this.handleQuestionClick}
-                        />
-                    ))}
-            </div>
+                        <ToggleButton type="radio" value={1}>
+                            Unanswered <Badge variant="light">{unanswered.length}</Badge>
+                        </ToggleButton>
+                        <ToggleButton type="radio" value={0}>
+                            Answered <Badge variant="light">{answered.length}</Badge>
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                </Card.Header>
+
+                {/* <Card.Body> */}
+
+
+                    <ListGroup variant="flush">
+                        {questions &&
+                            this.getFilteredQuestions(showAnswered).map(
+                                (question) => (
+                                    <Question
+                                        key={question.id}
+                                        question={question}
+                                        hasAuthedUserAnswered={
+                                            this.hasAuthedUserAnswered
+                                        }
+                                        onClick={this.handleQuestionClick}
+                                    />
+                                )
+                            )}
+                    </ListGroup>
+                {/* </Card.Body> */}
+            </Card>
         )
     }
 }

@@ -1,8 +1,8 @@
 .App {
     text-align: center;
-    margin: 1em auto;
-    width: 60%;
-    min-width: 400px;
+    /* margin: 1em auto; */
+    /* width: 60%;
+    min-width: 400px; */
 }
 
 .App-logo {
@@ -42,11 +42,16 @@
     color: #999999;
 }
 
+/* CUSTOM */
 .welcome {
     display: flex;
     font-size: 0.7em;
     justify-content: space-between;
-    margin: 1em 0;
+    white-space: nowrap;
+}
+
+.welcome span:first-child {
+    padding-right: 1em;
 }
 
 .welcome-avatar {
@@ -58,18 +63,6 @@
     border-radius: 10%;
 }
 
-.navigation {
-    font-size: 0.7em;
-    margin: 0.8em 0;
-}
-
-.card {
-    border: solid 1px #dddddd;
-    border-radius: 2px;
-    padding: 1.5em;
-    box-shadow: 2px 2px 7px 0px rgba(200, 200, 200, 0.7);
-}
-
 .poll {
     padding: 0.5em;
 }
@@ -79,17 +72,8 @@
     font-weight: bold;
 }
 
-.question {
-    padding: 1em 0;
-    border-bottom: solid 1px #eeeeee;
-}
-
-.question:last-child {
-    border-bottom: none;
-}
-
 .option-checkbox {
-    font-size: 1.5em;
+    font-size: 2em;
     margin-top: -4px;
     padding-right: 8px;
     vertical-align: middle;
@@ -131,6 +115,7 @@
 }
 
 .leaderboard-user {
+    color: white;
     list-style: none;
     padding: 0;
     text-align: left;
@@ -138,23 +123,15 @@
     flex-direction: column;
 }
 
-.leaderboard-user li {
-    border-radius: 6px;
+.leaderboard-user .list-group-item {
     color: #999999;
     display: grid;
-    margin-bottom: 2em;
-    padding: 0.4em;
     grid-template-columns: 74px 1fr 1fr 1fr 1fr;
     grid-template-rows: 50% auto;
 
     grid-template-areas:
         'avatar username username username username'
         'avatar asked answered answered answered';
-}
-
-.leaderboard-user li.currentUser {
-    border: solid 3px #1dae5f69;
-    box-shadow: 2px 2px 8px rgba(180, 180, 180, 0.5);
 }
 
 .leaderboard-avatar {
@@ -171,6 +148,11 @@
     color: #333333;
     font-size: 1.6em;
     grid-area: username;
+}
+
+.leaderboard-user .list-group-item.currentUser,
+.leaderboard-user .list-group-item.currentUser .username{
+    color: white;
 }
 
 .asked {

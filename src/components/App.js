@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 // import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
+import { Container } from 'react-bootstrap'
 import '../App.css'
 import { handleInitialData } from '../actions/shared'
-import Login from './Login'
-import Welcome from './Welcome'
 import Navigation from './Navigation'
+import Login from './Login'
+import Header from './Header'
 import Questions from './Questions'
 import Leaderboard from './Leaderboard'
 import QuestionDetail from './QuestionDetail'
 import CreateQuestion from './CreateQuestion'
-import { Route, Link } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 class App extends Component {
     componentDidMount() {
@@ -19,18 +20,17 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
+            <Container className="App">
+                <Navigation />
+                {/* <Route path="/" component={Header} /> */}
                 <div className="page-title">Would you rather?</div>
                 <Route path="/" exact component={Login} />
-                <Welcome />
-                <Navigation />
-                <Questions />
-
+                <Route path="/" exact component={Questions} />
                 <Route path="/question-detail" component={QuestionDetail} />
                 <Route path="/leaderboard" component={Leaderboard} />
-            </div>
+            </Container>
         )
-    }
+    }F
 }
 
-export default connect()(App)
+export default withRouter(connect()(App))

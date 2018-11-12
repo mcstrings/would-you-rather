@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getUser, getUserName, getArrayFromObj } from '../utils'
 import Avatar from './Avatar'
+import { Card, ListGroup } from 'react-bootstrap'
 
 class Leaderboard extends Component {
     getNumCreated = (user) => user.questions.length
@@ -25,25 +26,31 @@ class Leaderboard extends Component {
         const { authedUserID } = this.props
 
         return (
-            <ul className="leaderboard-user">
-                {this.sortUsersByNumQuestions().map((user) => (
-                    <li
-                        key={user.id}
-                        className={
-                            authedUserID === user.id ? 'currentUser' : ''
-                        }
-                    >
-                        <Avatar className="leaderboard-avatar" user={user} />
-                        <div className="username">{getUserName(user)}</div>
-                        <div className="asked">
-                            {this.getNumCreated(user)} asked
-                        </div>
-                        <div className="answered">
-                            {this.getNumAnswered(user)} answered
-                        </div>
-                    </li>
-                ))}
-            </ul>
+            <Card>
+                <Card.Header>Leaderboard</Card.Header>
+                <ListGroup className="leaderboard-user" variant="flush">
+                    {this.sortUsersByNumQuestions().map((user) => (
+                        <ListGroup.Item
+                            key={user.id}
+                            className={
+                                authedUserID === user.id ? 'bg-primary currentUser' : ''
+                            }
+                        >
+                            <Avatar
+                                className="leaderboard-avatar"
+                                user={user}
+                            />
+                            <div className="username">{getUserName(user)}</div>
+                            <div className="asked">
+                                {this.getNumCreated(user)} asked
+                            </div>
+                            <div className="answered">
+                                {this.getNumAnswered(user)} answered
+                            </div>
+                        </ListGroup.Item>
+                    ))}
+                </ListGroup>
+            </Card>
         )
     }
 }

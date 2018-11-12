@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md'
+import { ListGroup } from 'react-bootstrap'
 
 export default class Question extends Component {
     getOptionCheckbox = (option) => {
@@ -20,17 +21,19 @@ export default class Question extends Component {
         const { question } = this.props
 
         return (
-            <div className="question" key={question.id} onClick={(e) =>  this.handleQuestionClick(e, question.id)}>
-                <div>
-                    {this.getOptionCheckbox(question.optionOne)}
-                    {question.optionOne.text}
+            <ListGroup.Item>
+                <div className="question" key={question.id} onClick={(e) =>  this.handleQuestionClick(e, question.id)}>
+                    <div>
+                        {this.getOptionCheckbox(question.optionOne)}
+                        {question.optionOne.text}
+                    </div>
+                    <div className="faded-text">or</div>
+                    <div>
+                        {this.getOptionCheckbox(question.optionTwo)}
+                        {question.optionTwo.text}
+                    </div>
                 </div>
-                <div className="faded-text">or</div>
-                <div>
-                    {this.getOptionCheckbox(question.optionTwo)}
-                    {question.optionTwo.text}
-                </div>
-            </div>
+            </ListGroup.Item>
         )
     }
 }

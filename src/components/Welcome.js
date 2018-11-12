@@ -20,8 +20,10 @@ class Welcome extends Component {
                     <div className="welcome">
                         <span>
                             Welcome,
-                            <Avatar className="welcome-avatar" user={authedUser} />
-
+                            <Avatar
+                                className="welcome-avatar"
+                                user={authedUser}
+                            />
                             {getUserName(authedUser)}
                         </span>
                         <span>

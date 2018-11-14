@@ -10,8 +10,8 @@ import Header from './Header'
 import Questions from './Questions'
 import Leaderboard from './Leaderboard'
 import QuestionDetail from './QuestionDetail'
-import CreateQuestion from './CreateQuestion'
-import { Route, Switch, withRouter } from 'react-router-dom'
+import NewQuestion from './NewQuestion'
+import { Route, withRouter } from 'react-router-dom'
 
 class App extends Component {
     componentDidMount() {
@@ -23,14 +23,14 @@ class App extends Component {
             <Container className="App">
                 <Navigation />
                 {/* <Route path="/" component={Header} /> */}
-                <div className="page-title">Would you rather?</div>
+                <h3 className="d-flex justify-content-center">Would you rather?</h3>
                 <Route path="/" exact component={Login} />
                 <Route path="/" exact component={Questions} />
-                <Route path="/question-detail" component={QuestionDetail} />
+                <Route path="/question-new" component={NewQuestion} />
                 <Route path="/leaderboard" component={Leaderboard} />
             </Container>
         )
-    }F
+    }
 }
 
 export default withRouter(connect()(App))

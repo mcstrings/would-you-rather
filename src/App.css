@@ -1,5 +1,5 @@
 .App {
-    text-align: center;
+    /* text-align: center; */
     /* margin: 1em auto; */
     /* width: 60%;
     min-width: 400px; */
@@ -100,6 +100,10 @@
     color: blue;
     cursor: pointer;
     text-decoration: underline;
+}
+
+.questions {
+    text-align: center;
 }
 
 .question-detail-avatar {

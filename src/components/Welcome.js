@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 import { getUser, getAvatar, getUserName } from '../utils'
 import Avatar from './Avatar'
+import { Button } from 'react-bootstrap'
 
 class Welcome extends Component {
     handleLogout = (e) => {
@@ -17,7 +18,7 @@ class Welcome extends Component {
         return (
             <Fragment>
                 {authedUserID && (
-                    <div className="welcome">
+                    <div className="welcome d-flex justify-contents-flex-end align-items-center">
                         <span>
                             Welcome,
                             <Avatar
@@ -27,9 +28,7 @@ class Welcome extends Component {
                             {getUserName(authedUser)}
                         </span>
                         <span>
-                            <a className="logout" onClick={this.handleLogout}>
-                                Logout
-                            </a>
+                            <Button size="sm" onClick={this.handleLogout}>Logout</Button>
                         </span>
                     </div>
                 )}

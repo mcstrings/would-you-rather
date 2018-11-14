@@ -55,7 +55,7 @@ class Questions extends Component {
         const unanswered = this.getFilteredQuestions(false)
 
         return (
-            <Card>
+            <Card className="questions">
                 <Card.Header>
                     <Card.Title>
                         Questions
@@ -78,8 +78,6 @@ class Questions extends Component {
                 </Card.Header>
 
                 {/* <Card.Body> */}
-
-
                     <ListGroup variant="flush">
                         {questions &&
                             this.getFilteredQuestions(showAnswered).map(

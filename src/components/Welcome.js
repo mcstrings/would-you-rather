@@ -15,6 +15,8 @@ class Welcome extends Component {
     render() {
         const { authedUser, authedUserID } = this.props
 
+        if(!this.props || this.props.authedUser === undefined) return null
+
         return (
             <Fragment>
                 {authedUserID && (

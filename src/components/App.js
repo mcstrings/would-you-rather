@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { Container } from 'react-bootstrap'
+import { Route, withRouter } from 'react-router-dom'
 import '../App.css'
 import { handleInitialData } from '../actions/shared'
 import Navigation from './Navigation'
@@ -11,7 +12,7 @@ import Questions from './Questions'
 import Leaderboard from './Leaderboard'
 import QuestionDetail from './QuestionDetail'
 import NewQuestion from './NewQuestion'
-import { Route, withRouter } from 'react-router-dom'
+import PageNotFound from './PageNotFound'
 
 class App extends Component {
     componentDidMount() {
@@ -26,8 +27,10 @@ class App extends Component {
                 <h3 className="d-flex justify-content-center">Would you rather?</h3>
                 <Route path="/" exact component={Login} />
                 <Route path="/" exact component={Questions} />
-                <Route path="/question-new" component={NewQuestion} />
+                <Route path="/add" component={NewQuestion} />
                 <Route path="/leaderboard" component={Leaderboard} />
+                <Route path="/question-detail/:id" component={QuestionDetail} />
+                {/* <Route path="*" component={PageNotFound} /> */}
             </Container>
         )
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getUser, getUserName, getArrayFromObj } from '../utils'
+import { withRouter } from 'react-router-dom'
+import { getUserName, getArrayFromObj } from '../utils'
 import Avatar from './Avatar'
 import { Card, ListGroup } from 'react-bootstrap'
 
@@ -25,15 +26,21 @@ class Leaderboard extends Component {
     render() {
         const { authedUserID } = this.props
 
+        console.log('Leaderboard???', this.props)
+
         return (
             <Card>
-                <Card.Header>Leaderboard</Card.Header>
+                <Card.Header>
+                    <h4 className="mb-0">Leaderboard</h4>
+                </Card.Header>
                 <ListGroup className="leaderboard-user" variant="flush">
                     {this.sortUsersByNumQuestions().map((user) => (
                         <ListGroup.Item
                             key={user.id}
                             className={
-                                authedUserID === user.id ? 'bg-primary currentUser' : ''
+                                authedUserID === user.id
+                                    ? 'bg-primary currentUser'
+                                    : ''
                             }
                         >
                             <Avatar
@@ -62,4 +69,4 @@ const mapStateToProps = ({ authedUser, users }) => {
     }
 }
 
-export default connect(mapStateToProps)(Leaderboard)
+export default withRouter(connect(mapStateToProps)(Leaderboard))

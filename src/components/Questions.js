@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom'
 import Question from './Question'
-import { getArrayFromObj } from '../utils'
+import { getArrayFromObj, hasAuthedUserAnswered } from '../utils'
 import {
     Badge,
     Card,
     ListGroup,
+    ListGroupItem,
     ToggleButtonGroup,
     ToggleButton
 } from 'react-bootstrap'
@@ -24,21 +26,16 @@ class Questions extends Component {
     }
 
     getFilteredQuestions = (showAnswered = false) => {
-        const { questions } = this.props
+        const { authedUserID, questions } = this.props
 
         const filteredQuestions = getArrayFromObj(questions).filter(
             (question) =>
                 showAnswered ===
-                (this.hasAuthedUserAnswered(question.optionOne) ||
-                    this.hasAuthedUserAnswered(question.optionTwo))
+                (hasAuthedUserAnswered(question.optionOne, authedUserID) ||
+                    hasAuthedUserAnswered(question.optionTwo, authedUserID))
         )
 
         return filteredQuestions
-    }
-
-    hasAuthedUserAnswered = (option) => {
-        const { authedUserID } = this.props
-        return option.votes.includes(authedUserID)
     }
 
     handleFilterChange = (value, e) => {
@@ -48,7 +45,7 @@ class Questions extends Component {
     }
 
     render() {
-        const { questions } = this.props
+        const { authedUserID, questions } = this.props
         const { showAnswered } = this.state
 
         const answered = this.getFilteredQuestions(true)
@@ -57,9 +54,7 @@ class Questions extends Component {
         return (
             <Card className="questions">
                 <Card.Header>
-                    <Card.Title>
-                        Questions
-                    </Card.Title>
+                    <Card.Title>Questions</Card.Title>
 
                     <ToggleButtonGroup
                         className="mb-1"
@@ -69,31 +64,30 @@ class Questions extends Component {
                         onChange={this.handleFilterChange}
                     >
                         <ToggleButton type="radio" value={1}>
-                            Unanswered <Badge variant="light">{unanswered.length}</Badge>
+                            Unanswered{' '}
+                            <Badge variant="light">{unanswered.length}</Badge>
                         </ToggleButton>
                         <ToggleButton type="radio" value={0}>
-                            Answered <Badge variant="light">{answered.length}</Badge>
+                            Answered{' '}
+                            <Badge variant="light">{answered.length}</Badge>
                         </ToggleButton>
                     </ToggleButtonGroup>
                 </Card.Header>
 
-                {/* <Card.Body> */}
-                    <ListGroup variant="flush">
-                        {questions &&
-                            this.getFilteredQuestions(showAnswered).map(
-                                (question) => (
-                                    <Question
-                                        key={question.id}
-                                        question={question}
-                                        hasAuthedUserAnswered={
-                                            this.hasAuthedUserAnswered
-                                        }
-                                        onClick={this.handleQuestionClick}
-                                    />
-                                )
-                            )}
-                    </ListGroup>
-                {/* </Card.Body> */}
+                <ListGroup variant="flush">
+                    {questions &&
+                        this.getFilteredQuestions(showAnswered).map(
+                            (question) => (
+                                <ListGroupItem
+                                    as={Link}
+                                    key={question.id}
+                                    to={`/question-detail/${question.id}`}
+                                >
+                                    <Question authedUserID={authedUserID} question={question} />
+                                </ListGroupItem>
+                            )
+                        )}
+                </ListGroup>
             </Card>
         )
     }
@@ -106,4 +100,4 @@ function mapStateToProps({ authedUser, questions }) {
     }
 }
 
-export default connect(mapStateToProps)(Questions)
+export default withRouter(connect(mapStateToProps)(Questions))

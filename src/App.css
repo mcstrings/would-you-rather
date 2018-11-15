@@ -63,6 +63,21 @@
     border-radius: 10%;
 }
 
+/* QUESTION */
+.question .list-group-item ul {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.question .list-group-item ul li {
+    list-style: none;
+}
+
+/* QUESTION DETAIL */
+.questions .list-group-item {
+    color: unset;
+}
+
 .poll {
     padding: 0.5em;
 }
@@ -128,7 +143,7 @@
 }
 
 .leaderboard-user .list-group-item {
-    color: #999999;
+    color: #333333;
     display: grid;
     grid-template-columns: 74px 1fr 1fr 1fr 1fr;
     grid-template-rows: 50% auto;

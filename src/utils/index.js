@@ -15,3 +15,7 @@ export const getUserName = (user) => {
 export const getArrayFromObj = (obj) => {
     return Object.keys(obj).map((key) => obj[key])
 }
+
+export const hasAuthedUserAnswered = (option, authedUserID = "") => {
+    return option.votes.includes(authedUserID)
+}

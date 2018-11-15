@@ -14,15 +14,14 @@ export default class Navigation extends Component {
                                 <LinkContainer exact to="/">
                                     <Nav.Link className="py-0">Home</Nav.Link>
                                 </LinkContainer>
-                                <LinkContainer to="/question-new">
+                                <LinkContainer to="/add">
                                     <Nav.Link className="py-0 text-nowrap">New Question</Nav.Link>
                                 </LinkContainer>
-                                <LinkContainer to="leaderboard">
+                                <LinkContainer to="/leaderboard">
                                     <Nav.Link className="py-0">Leadboard</Nav.Link>
                                 </LinkContainer>
                             </Nav>
                         </Col>
-        
                         <Col className="ml-auto">
                             <Nav className="d-flex justify-content-end mt-2">
                                 <Welcome />

@@ -30,15 +30,8 @@ class NewQuestion extends Component {
         e.preventDefault()
         e.stopPropagation()
 
-        const { dispatch, authedUserID } = this.props
+        const { dispatch, authedUserID, history } = this.props
         const { optionOneText, optionTwoText } = this.state
-
-        // const form = e.currentTarget
-        // if (form.checkValidity() === false) {
-        //     console.log("What's good, Miley?")
-        // } else {
-        //     console.log("It's all good in the hood, baby")
-        // }
 
         const question = {
             author: authedUserID,
@@ -46,18 +39,16 @@ class NewQuestion extends Component {
             optionTwoText
         }
 
-        // `_saveQuestion(question)` Method
-        // _Description_: Save the polling question in the database.
-        // _Parameters_: Object that includes the following properties: `author`, `optionOneText`, and `optionTwoText`. More details about these properties:
-        dispatch(handleAddQuestion(question))
+        dispatch(handleAddQuestion(question, history))
     }
 
     render() {
-        const { validated } = this.state
-
         return (
             <Container>
                 <Card>
+                    <Card.Header>
+                        <h4 className="mb-0">Add a new question</h4>
+                    </Card.Header>
                     <Form onSubmit={this.handleSubmit}>
                         <Card.Body>
                             <Form.Group controlId="poll-option-1">

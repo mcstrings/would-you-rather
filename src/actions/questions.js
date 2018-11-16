@@ -25,7 +25,7 @@ export const handleAddQuestion = (question, history) => {
             await dispatch(handleUpdateUserQuestions(newQuestion)) // add the question to the user
 
             // Redirect to the question detail after successful creation
-            history.push(`/question-detail/${newQuestion.id}`)
+            history.push("/")
         }
         catch(err) {
             console.log(err);

@@ -8,8 +8,6 @@ import { getUser, getUserName } from '../utils'
 
 class QuestionDetail extends Component {
     render() {
-        console.log('QuestionDetail', this.props);
-
         const {
             authedUserID,
             questions,

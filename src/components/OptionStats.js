@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { getArrayFromObj } from '../utils'
+import { Label } from 'react-bootstrap'
 
 export default class OptionStats extends Component {
     render() {
@@ -16,14 +17,14 @@ export default class OptionStats extends Component {
                         the number of people who voted for that option
                         the percentage of people who voted for that option */}
                 <li className="asked">
-                    {totalNumPeople}{' '}
-                    {totalNumPeople > 1 || totalNumPeople === 0
+                    <span className="callout">{numOptionVotes}</span>{' '}
+                    {numOptionVotes > 1 || numOptionVotes === 0
                         ? 'people have '
                         : 'person has '}{' '}
                     answered this question.
                 </li>
                 <li className="answered">
-                    {percentage}% of people have answered
+                    <span className="callout">{percentage}%</span> of people have answered
                 </li>
             </ul>
         )

@@ -49,10 +49,10 @@ class Leaderboard extends Component {
                             />
                             <div className="username">{getUserName(user)}</div>
                             <div className="asked">
-                                {this.getNumCreated(user)} asked
+                                <span className="callout">{this.getNumCreated(user)}</span> asked
                             </div>
                             <div className="answered">
-                                {this.getNumAnswered(user)} answered
+                                <span className="callout">{this.getNumAnswered(user)}</span> answered
                             </div>
                         </ListGroup.Item>
                     ))}

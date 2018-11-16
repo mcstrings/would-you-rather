@@ -35,7 +35,11 @@ class Questions extends Component {
                     hasAuthedUserAnswered(question.optionTwo, authedUserID))
         )
 
-        return filteredQuestions
+        return this.sortQuestions(filteredQuestions)
+    }
+
+    sortQuestions = (questions) => {
+        return questions.sort((a, b) => b.timestamp - a.timestamp)
     }
 
     handleFilterChange = (value, e) => {
@@ -83,7 +87,10 @@ class Questions extends Component {
                                     key={question.id}
                                     to={`/question-detail/${question.id}`}
                                 >
-                                    <Question authedUserID={authedUserID} question={question} />
+                                    <Question
+                                        authedUserID={authedUserID}
+                                        question={question}
+                                    />
                                 </ListGroupItem>
                             )
                         )}

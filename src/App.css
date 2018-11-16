@@ -44,14 +44,13 @@
 
 /* CUSTOM */
 .welcome {
-    display: flex;
-    font-size: 0.7em;
-    justify-content: space-between;
+    /* display: flex; */
+    font-size: 1em;
     white-space: nowrap;
 }
 
 .welcome span:first-child {
-    padding-right: 1em;
+    padding-right: 0.8em;
 }
 
 .welcome-avatar {
@@ -180,4 +179,9 @@
 
 .answered {
     grid-area: answered;
+}
+
+.callout {
+    font-size: 1.2em;
+    font-weight: 500;
 }

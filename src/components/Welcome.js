@@ -20,7 +20,7 @@ class Welcome extends Component {
         return (
             <Fragment>
                 {authedUserID && (
-                    <div className="welcome d-flex justify-contents-flex-end align-items-center">
+                    <div className="welcome d-flex justify-content-end align-items-center">
                         <span>
                             Welcome,
                             <Avatar

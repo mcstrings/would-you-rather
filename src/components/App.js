@@ -21,7 +21,7 @@ class App extends Component {
 
     render() {
         return (
-            <Container className="App">
+            <Container className="p-0 m-0">
                 <Navigation />
                 {/* <Route path="/" component={Header} /> */}
                 <h3 className="d-flex justify-content-center">Would you rather?</h3>

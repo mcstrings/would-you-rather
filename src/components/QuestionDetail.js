@@ -22,7 +22,7 @@ class QuestionDetail extends Component {
 
         return (
             <Fragment>
-                <Card className="question">
+                <Card className="question mb-3 mx-3">
                     <Card.Header>
                         <div className="py-3">
                             <Avatar

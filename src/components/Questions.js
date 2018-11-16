@@ -56,7 +56,7 @@ class Questions extends Component {
         const unanswered = this.getFilteredQuestions(false)
 
         return (
-            <Card className="questions">
+            <Card className="questions mb-3 mx-3">
                 <Card.Header>
                     <Card.Title>Questions</Card.Title>
 

@@ -26,10 +26,8 @@ class Leaderboard extends Component {
     render() {
         const { authedUserID } = this.props
 
-        console.log('Leaderboard???', this.props)
-
         return (
-            <Card>
+            <Card className="mb-3 mx-3">
                 <Card.Header>
                     <h4 className="mb-0">Leaderboard</h4>
                 </Card.Header>

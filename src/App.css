@@ -44,7 +44,7 @@
 
 /* CUSTOM */
 .welcome {
-    /* display: flex; */
+    color: var(--light);
     font-size: 1em;
     white-space: nowrap;
 }

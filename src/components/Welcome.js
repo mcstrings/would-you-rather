@@ -1,15 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { setAuthedUser } from '../actions/authedUser'
-import { getUser, getAvatar, getUserName } from '../utils'
+import { getUser, getUserName } from '../utils'
 import Avatar from './Avatar'
 import { Button } from 'react-bootstrap'
-
+import { handleSetAuthedUser } from '../actions/authedUser'
+import { withRouter } from 'react-router-dom'
 class Welcome extends Component {
     handleLogout = (e) => {
         e.preventDefault()
-        const { dispatch } = this.props
-        dispatch(setAuthedUser(''))
+        const { dispatch, history } = this.props
+        dispatch(handleSetAuthedUser(''))
+        history.push("/")
     }
 
     render() {
@@ -46,4 +47,4 @@ const mapStateToProps = ({ authedUser, users }) => {
     }
 }
 
-export default connect(mapStateToProps)(Welcome)
+export default withRouter(connect(mapStateToProps)(Welcome))

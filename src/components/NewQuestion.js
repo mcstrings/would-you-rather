@@ -26,7 +26,7 @@ class NewQuestion extends Component {
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault()
         e.stopPropagation()
 
@@ -39,7 +39,8 @@ class NewQuestion extends Component {
             optionTwoText
         }
 
-        dispatch(handleAddQuestion(question, history))
+        await dispatch(handleAddQuestion(question, history))
+        history.push("/")
     }
 
     render() {

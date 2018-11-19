@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
-// import { Route, Link } from 'react-router-dom';
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { Container } from 'react-bootstrap'
-import { Route, withRouter } from 'react-router-dom'
+import { Route, withRouter, Redirect } from 'react-router-dom'
+import LoadingBar from 'react-redux-loading-bar'
 import '../App.css'
 import { handleInitialData } from '../actions/shared'
 import Navigation from './Navigation'
-import Login from './Login'
-import Header from './Header'
 import Questions from './Questions'
 import Leaderboard from './Leaderboard'
 import QuestionDetail from './QuestionDetail'
@@ -20,20 +18,61 @@ class App extends Component {
     }
 
     render() {
+        const { authedUser } = this.props
+
         return (
-            <Container className="p-0 m-0">
+            <Container fluid className="p-0 m-0">
+                <LoadingBar
+                    style={{ backgroundColor: 'blue', height: '5px' }}
+                />
                 <Navigation />
-                {/* <Route path="/" component={Header} /> */}
-                <h3 className="d-flex justify-content-center">Would you rather?</h3>
-                <Route path="/" exact component={Login} />
+                <h3 className="d-flex justify-content-center">
+                    Would you rather?
+                </h3>
                 <Route path="/" exact component={Questions} />
-                <Route path="/add" component={NewQuestion} />
-                <Route path="/leaderboard" component={Leaderboard} />
-                <Route path="/question-detail/:id" component={QuestionDetail} />
-                {/* <Route path="*" component={PageNotFound} /> */}
+                <PrivateRoute
+                    path="/add"
+                    component={NewQuestion}
+                    authedUser={authedUser}
+                />
+                <PrivateRoute
+                    path="/leaderboard"
+                    component={Leaderboard}
+                    authedUser={authedUser}
+                />
+                <PrivateRoute
+                    path="/question-detail/:id"
+                    component={QuestionDetail}
+                    authedUser={authedUser}
+                />
+                <Route path="/404" component={PageNotFound} />
             </Container>
         )
     }
 }
 
-export default withRouter(connect()(App))
+const PrivateRoute = ({ component: Component, ...rest }) => {
+    return (
+        <Route
+            {...rest}
+            render={(props) => {
+                const { authedUser } = { ...rest }
+
+                return typeof authedUser === 'string' &&
+                    authedUser.length > 0 ? (
+                    <Component {...props} />
+                ) : (
+                    <Redirect to="/404" />
+                )
+            }}
+        />
+    )
+}
+
+const mapStateToProps = ({ authedUser }) => {
+    return {
+        authedUser
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(App))

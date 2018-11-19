@@ -1,32 +1,49 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
+import { withRouter } from 'react-router-dom'
 import Welcome from './Welcome'
+import Login from './Login'
 import { Navbar, Nav } from 'react-bootstrap'
+import { getUser } from '../utils'
 
-export default class Navigation extends Component {
+class Navigation extends Component {
     render() {
+        const { authedUser } = this.props
+
+        console.log('router stuff', this.props);
+
         return (
-            <Navbar variant="dark" bg="dark" collapseOnSelect expand="sm">
+            <Navbar variant="dark" bg="dark" collapseOnSelect expand="sm" className="mb-3">
                 <Navbar.Toggle />
                 <Navbar.Collapse>
-                    <Nav className="text-light">
-                        <LinkContainer exact to="/">
-                            <Nav.Link className="py-0">Home</Nav.Link>
+                    <Nav>
+                        <LinkContainer exact={true} to="/">
+                            <Nav.Link active={false} className="py-0">Home</Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/add">
-                            <Nav.Link className="py-0 text-nowrap">
+                            <Nav.Link active={false} className="py-0 text-nowrap">
                                 New Question
                             </Nav.Link>
                         </LinkContainer>
                         <LinkContainer to="/leaderboard">
-                            <Nav.Link className="py-0">Leaderboard</Nav.Link>
+                            <Nav.Link active={false} className="py-0">Leaderboard</Nav.Link>
                         </LinkContainer>
                     </Nav>
                 </Navbar.Collapse>
                 <Nav>
-                    <Welcome />
+                    {authedUser ? <Welcome /> : <Login />}
                 </Nav>
             </Navbar>
         )
     }
 }
+
+const mapStateToProps = ({ authedUser, users }) => {
+    return {
+        authedUser: getUser(authedUser, users),
+        authedUserID: authedUser !== '' ? authedUser : undefined // This will make for a more straightforward conditional above
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(Navigation))

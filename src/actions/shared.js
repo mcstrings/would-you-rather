@@ -17,11 +17,11 @@ export const handleInitialData = () => {
         const AUTHED_USER_ID = ''
         const [users, questions] = await getUsersAndQuestions()
 
-        dispatch(showLoading())
+        // dispatch(showLoading())
         dispatch(receiveUsers(users))
         dispatch(receiveQuestions(questions))
         dispatch(setAuthedUser(AUTHED_USER_ID))
-        dispatch(hideLoading())
+        // dispatch(hideLoading())
 
         // Promise.all([_getUsers(), _getQuestions()])
         //     .then(([users, questions]) => ({

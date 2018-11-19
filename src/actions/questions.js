@@ -16,16 +16,13 @@ export const saveQuestion = (question) => ({
 })
 
 export const handleAddQuestion = (question, history) => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
 
         dispatch(showLoading())
         try {
             const newQuestion = await _saveQuestion(question) // api call
             await dispatch(saveQuestion(newQuestion)) // dispatch the action
             await dispatch(handleUpdateUserQuestions(newQuestion)) // add the question to the user
-
-            // Redirect to the question detail after successful creation
-            history.push("/")
         }
         catch(err) {
             console.log(err);

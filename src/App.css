@@ -1,8 +1,5 @@
-.App {
-    /* text-align: center; */
-    /* margin: 1em auto; */
-    /* width: 60%;
-    min-width: 400px; */
+.container-fluid {
+    min-width: 400px;
 }
 
 .App-logo {

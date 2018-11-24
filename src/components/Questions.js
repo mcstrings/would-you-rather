@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
 import Question from './Question'
-import { getArrayFromObj, hasAuthedUserAnswered } from '../utils'
+import { getArrayFromObj, isAuthedUsersAnswer } from '../utils'
 import {
     Badge,
     Card,
@@ -31,8 +30,8 @@ class Questions extends Component {
         const filteredQuestions = getArrayFromObj(questions).filter(
             (question) =>
                 showAnswered ===
-                (hasAuthedUserAnswered(question.optionOne, authedUserID) ||
-                    hasAuthedUserAnswered(question.optionTwo, authedUserID))
+                (isAuthedUsersAnswer(question.optionOne, authedUserID) ||
+                    isAuthedUsersAnswer(question.optionTwo, authedUserID))
         )
 
         return this.sortQuestions(filteredQuestions)
@@ -57,8 +56,8 @@ class Questions extends Component {
 
         return (
             <Card className="questions mb-3 mx-3">
-                <Card.Header>
-                    <Card.Title>Questions</Card.Title>
+                <Card.Header className="text-center">
+                    {/* <Card.Title>Questions</Card.Title> */}
 
                     <ToggleButtonGroup
                         className="mb-1"
@@ -82,14 +81,12 @@ class Questions extends Component {
                     {questions &&
                         this.getFilteredQuestions(showAnswered).map(
                             (question) => (
-                                <ListGroupItem
-                                    as={Link}
-                                    key={question.id}
-                                    to={`/question-detail/${question.id}`}
-                                >
+                                <ListGroupItem key={question.id}>
                                     <Question
                                         authedUserID={authedUserID}
                                         question={question}
+                                        withDetailsButton={true}
+                                        withAvatar={true}
                                     />
                                 </ListGroupItem>
                             )
@@ -107,4 +104,4 @@ function mapStateToProps({ authedUser, questions }) {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Questions))
+export default connect(mapStateToProps)(Questions)

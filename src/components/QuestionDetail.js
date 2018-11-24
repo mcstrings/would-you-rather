@@ -23,17 +23,6 @@ class QuestionDetail extends Component {
         return (
             <Fragment>
                 <Card className="question mb-3 mx-3">
-                    <Card.Header>
-                        <div className="py-3">
-                            <Avatar
-                                className="question-detail-avatar"
-                                user={author}
-                            />
-                            <span className="question-detail-username">
-                                {authorID === authedUserID ? "You" : getUserName(author)} created this question
-                            </span>
-                        </div>
-                    </Card.Header>
                     {question && (
                         <Question
                             authedUserID={authedUserID}
@@ -41,6 +30,17 @@ class QuestionDetail extends Component {
                             question={question}
                         />
                     )}
+                    <Card.Footer>
+                        <div>
+                            <Avatar
+                                className="question-detail-avatar md"
+                                user={author}
+                            />
+                            <span>
+                                {authorID === authedUserID ? "You" : getUserName(author)} created this question
+                            </span>
+                        </div>
+                    </Card.Footer>
                 </Card>
             </Fragment>
         )

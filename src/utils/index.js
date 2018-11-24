@@ -3,7 +3,6 @@ export const getUser = (userID = '', users) => {
     return user ? user : undefined
 }
 
-// TODO: Make into component for different presentations
 export const getAvatar = (user) => {
     return user ? user.avatarURL : ''
 }
@@ -16,6 +15,6 @@ export const getArrayFromObj = (obj) => {
     return Object.keys(obj).map((key) => obj[key])
 }
 
-export const hasAuthedUserAnswered = (option, authedUserID = "") => {
+export const isAuthedUsersAnswer = (option, authedUserID = "") => {
     return option.votes.includes(authedUserID)
 }

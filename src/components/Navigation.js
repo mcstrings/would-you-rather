@@ -11,8 +11,6 @@ class Navigation extends Component {
     render() {
         const { authedUser } = this.props
 
-        console.log('router stuff', this.props);
-
         return (
             <Navbar variant="dark" bg="dark" collapseOnSelect expand="sm" className="mb-3">
                 <Navbar.Toggle />

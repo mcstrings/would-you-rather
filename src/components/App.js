@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Container } from 'react-bootstrap'
 import { Route, withRouter, Redirect } from 'react-router-dom'
@@ -21,12 +21,12 @@ class App extends Component {
         const { authedUser } = this.props
 
         return (
-            <Container fluid className="p-0 m-0">
+            <Container fluid className="px-0 pb-1 mx-0">
                 <LoadingBar
                     style={{ backgroundColor: 'blue', height: '5px' }}
                 />
                 <Navigation />
-                <h3 className="d-flex justify-content-center">
+                <h3 className="d-flex justify-content-center text-white">
                     Would you rather?
                 </h3>
                 <Route path="/" exact component={Questions} />

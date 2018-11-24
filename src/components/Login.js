@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { getArrayFromObj, getUser } from '../utils'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { handleSetAuthedUser } from '../actions/authedUser'
+import Avatar from './Avatar'
 class Login extends Component {
     handleSelectUserChange = (value, e) => {
         const { dispatch, history } = this.props
@@ -22,6 +23,7 @@ class Login extends Component {
 
                 <DropdownButton className="d-inline-flex" size="sm"
                     id="dropdown-users"
+                    variant="success"
                     alignRight={true}
                     value={authedUserID}
                     title={title}
@@ -40,7 +42,7 @@ class Login extends Component {
                             })
                             .map((user) => (
                                 <Dropdown.Item key={user.id} eventKey={user.id}>
-                                    {user.name}
+                                    <Avatar className={"dropdown-user-avatar sm"} user={user} /> {user.name}
                                 </Dropdown.Item>
                             ))}
                 </DropdownButton>

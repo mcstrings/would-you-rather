@@ -12,7 +12,7 @@ export default class OptionStats extends Component {
         const percentage = Math.floor((100 * numOptionVotes) / totalNumPeople)
 
         return (
-            <ul>
+            <ul className="pl-0">
                 {/* TODO: Stats
                         the number of people who voted for that option
                         the percentage of people who voted for that option */}

@@ -42,7 +42,7 @@ class Leaderboard extends Component {
                             }
                         >
                             <Avatar
-                                className="leaderboard-avatar"
+                                className="leaderboard-avatar lg"
                                 user={user}
                             />
                             <div className="username">{getUserName(user)}</div>

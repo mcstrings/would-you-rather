@@ -25,7 +25,7 @@ class Welcome extends Component {
                         <span>
                             Welcome,
                             <Avatar
-                                className="welcome-avatar"
+                                className="welcome-avatar md"
                                 user={authedUser}
                             />
                             {getUserName(authedUser)}

@@ -9,7 +9,7 @@ export default class Avatar extends Component {
             <img
                 src={getAvatar(user)}
                 alt={getUserName(user)}
-                className={className}
+                className={`avatar ${className}`}
             />
         )
     }

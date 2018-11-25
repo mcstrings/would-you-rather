@@ -28,6 +28,7 @@ class QuestionDetail extends Component {
                             authedUserID={authedUserID}
                             users={users}
                             question={question}
+                            withForm={true}
                         />
                     )}
                     <Card.Footer>

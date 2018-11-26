@@ -22,18 +22,5 @@ export const handleInitialData = () => {
         dispatch(receiveQuestions(questions))
         dispatch(setAuthedUser(AUTHED_USER_ID))
         // dispatch(hideLoading())
-
-        // Promise.all([_getUsers(), _getQuestions()])
-        //     .then(([users, questions]) => ({
-        //         users,
-        //         questions
-        //     }))
-        //     .then(({ users, questions }) => {
-        //         dispatch(showLoading())
-        //         dispatch(receiveUsers(users))
-        //         dispatch(receiveQuestions(questions))
-        //         dispatch(setAuthedUser(AUTHED_USER_ID))
-        //         dispatch(hideLoading())
-        //     })
     }
 }

@@ -13,18 +13,18 @@ export default class OptionStats extends Component {
 
         return (
             <ul className="pl-0">
-                {/* TODO: Stats
+                {/* Stats
                         the number of people who voted for that option
                         the percentage of people who voted for that option */}
                 <li className="asked">
                     <span className="callout">{numOptionVotes}</span>{' '}
                     {numOptionVotes > 1 || numOptionVotes === 0
-                        ? 'people have '
-                        : 'person has '}{' '}
-                    answered this question.
+                        ? 'people '
+                        : 'person '}{' '}
+                    chose this option.
                 </li>
                 <li className="answered">
-                    <span className="callout">{percentage}%</span> of people have answered
+                    <span className="callout">{percentage}%</span> voted for this option.
                 </li>
             </ul>
         )

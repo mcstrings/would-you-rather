@@ -10,6 +10,7 @@ export default class Option extends Component {
             users,
             showForm,
             option,
+            hasAuthedUserAnswered,
             handleRadioBtnClick,
             getOptionCheckbox
         } = this.props
@@ -20,7 +21,7 @@ export default class Option extends Component {
                     <Col>
                         <h5 className="mb-0">
                             <Form.Group
-                                className="mb-0"
+                                className="mb-0 flex-nowrap"
                                 controlId={`form-${answer}-${question.id}`}
                             >
                                 {showForm ? (
@@ -33,7 +34,7 @@ export default class Option extends Component {
                                         onClick={handleRadioBtnClick}
                                     />
                                 ) : (
-                                    getOptionCheckbox(option)
+                                    hasAuthedUserAnswered && getOptionCheckbox(option)
                                 )}
 
                                 <Form.Label>{option.text}</Form.Label>

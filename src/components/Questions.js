@@ -57,8 +57,6 @@ class Questions extends Component {
         return (
             <Card className="questions mb-3 mx-3">
                 <Card.Header className="text-center">
-                    {/* <Card.Title>Questions</Card.Title> */}
-
                     <ToggleButtonGroup
                         className="mb-1"
                         name="toggleAnswered"

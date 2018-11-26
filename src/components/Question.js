@@ -7,6 +7,7 @@ import { Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ListGroup } from 'react-bootstrap'
 import Avatar from './Avatar'
+import Option from './Option'
 import OptionStats from './OptionStats'
 import { getUser, getUserName } from '../utils'
 import { handleSaveQuestionAnswer } from '../actions/questions'
@@ -105,109 +106,45 @@ class Question extends Component {
                     )}
 
                     <Form>
-                        {/* Option One */}
                         <Row>
-                            <Col>
-                                <h5 className="mb-0">
-                                    <Form.Group
-                                        ref="optionOne"
-                                        className="mb-0"
-                                        controlId={`formOptionOne-${
-                                            question.id
-                                        }`}
-                                    >
-                                        {showForm ? (
-                                            <Form.Check
-                                                type="radio"
-                                                name="questionOption"
-                                                ref="optionOne"
-                                                inline
-                                                className="mr-1"
-                                                data-answer="optionOne"
-                                                onClick={
-                                                    this.handleRadioBtnClick
-                                                }
-                                            />
-                                        ) : (
-                                            this.getOptionCheckbox(
-                                                question.optionOne
-                                            )
-                                        )}
-
-                                        <Form.Label>
-                                            {question.optionOne.text}
-                                        </Form.Label>
-                                    </Form.Group>
-                                </h5>
+                            {/* Option One */}
+                            <Col md={5}>
+                                <Option
+                                    question={question}
+                                    users={users}
+                                    showForm={showForm}
+                                    option={question.optionOne}
+                                    answer={'optionOne'}
+                                    handleRadioBtnClick={
+                                        this.handleRadioBtnClick
+                                    }
+                                    getOptionCheckbox={this.getOptionCheckbox}
+                                />
                             </Col>
-                        </Row>
 
-                        {/* Option One Stats */}
-                        {users && (
-                            <Row className="my-0">
-                                <Col>
-                                    <OptionStats
-                                        option={question.optionOne}
-                                        users={users}
-                                    />
-                                </Col>
-                            </Row>
-                        )}
-
-                        {/* Or */}
-                        <Row>
-                            <Col className="d-flex justify-content-center">
+                            {/* Or */}
+                            <Col
+                                md={2}
+                                className="d-flex justify-content-center"
+                            >
                                 <h5 className="text-secondary">or</h5>
                             </Col>
-                        </Row>
 
-                        {/* Option Two */}
-                        <Row>
-                            <Col>
-                                <h5 className="mb-0">
-                                    <Form.Group
-                                        ref="optionTwo"
-                                        className="mb-0"
-                                        controlId={`formOptionTwo-${
-                                            question.id
-                                        }`}
-                                    >
-                                        {showForm ? (
-                                            <Form.Check
-                                                type="radio"
-                                                name="questionOption"
-                                                inline
-                                                className="mr-1"
-                                                data-answer="optionTwo"
-                                                onClick={
-                                                    this.handleRadioBtnClick
-                                                }
-                                            />
-                                        ) : (
-                                            this.getOptionCheckbox(
-                                                question.optionTwo
-                                            )
-                                        )}
-
-                                        <Form.Label>
-                                            {question.optionTwo.text}
-                                        </Form.Label>
-                                    </Form.Group>
-                                </h5>
+                            {/* Option Two */}
+                            <Col md={5}>
+                                <Option
+                                    question={question}
+                                    users={users}
+                                    showForm={showForm}
+                                    option={question.optionTwo}
+                                    answer={'optionTwo'}
+                                    handleRadioBtnClick={
+                                        this.handleRadioBtnClick
+                                    }
+                                    getOptionCheckbox={this.getOptionCheckbox}
+                                />
                             </Col>
                         </Row>
-
-                        {/* Option Two Stats */}
-                        {users && (
-                            <Row className="my-0">
-                                <Col>
-                                    <OptionStats
-                                        option={question.optionTwo}
-                                        users={users}
-                                    />
-                                </Col>
-                            </Row>
-                        )}
                     </Form>
 
                     {/* Save Answer Button */}

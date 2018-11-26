@@ -6,11 +6,10 @@ import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md'
 import { Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { ListGroup } from 'react-bootstrap'
-import Avatar from './Avatar'
-import Option from './Option'
-import OptionStats from './OptionStats'
 import { getUser, getUserName } from '../utils'
 import { handleSaveQuestionAnswer } from '../actions/questions'
+import Avatar from './Avatar'
+import Option from './Option'
 
 class Question extends Component {
     state = {
@@ -80,7 +79,7 @@ class Question extends Component {
             withDetailsButton = false
         } = this.props
 
-        const { showForm = false } = this.state
+        const { answer, showForm, hasAuthedUserAnswered } = this.state
 
         const user = getUser(question.author, users)
 
@@ -92,10 +91,7 @@ class Question extends Component {
                         <Fragment>
                             <Row className="dflex align-items-center text-left mb-1">
                                 <Avatar className="mr-1 sm" user={user} />{' '}
-                                {question.author === authedUserID
-                                    ? 'You'
-                                    : getUserName(user)}{' '}
-                                asked
+                                {getUserName(user, authedUserID)} asked
                             </Row>
                             <Row className="dflex text-left mb-3 text-secondary">
                                 <h5 className="text-secondary">
@@ -115,6 +111,7 @@ class Question extends Component {
                                     showForm={showForm}
                                     option={question.optionOne}
                                     answer={'optionOne'}
+                                    hasAuthedUserAnswered={hasAuthedUserAnswered}
                                     handleRadioBtnClick={
                                         this.handleRadioBtnClick
                                     }
@@ -124,20 +121,21 @@ class Question extends Component {
 
                             {/* Or */}
                             <Col
-                                md={2}
+                                md={1}
                                 className="d-flex justify-content-center"
                             >
                                 <h5 className="text-secondary">or</h5>
                             </Col>
 
                             {/* Option Two */}
-                            <Col md={5}>
+                            <Col md={6}>
                                 <Option
                                     question={question}
                                     users={users}
                                     showForm={showForm}
                                     option={question.optionTwo}
                                     answer={'optionTwo'}
+                                    hasAuthedUserAnswered={hasAuthedUserAnswered}
                                     handleRadioBtnClick={
                                         this.handleRadioBtnClick
                                     }
@@ -154,7 +152,7 @@ class Question extends Component {
                                 onClick={this.handleSubmit}
                                 variant="success"
                                 className="btn-sm btn-block"
-                                disabled={!this.state.answer}
+                                disabled={!answer}
                             >
                                 Save Answer
                             </Button>
@@ -166,7 +164,7 @@ class Question extends Component {
                         <div className="text-center">
                             <Button
                                 variant={
-                                    this.state.hasAuthedUserAnswered
+                                    hasAuthedUserAnswered
                                         ? 'primary'
                                         : 'success'
                                 }
@@ -174,7 +172,7 @@ class Question extends Component {
                                 as={Link}
                                 to={`/question-detail/${question.id}`}
                             >
-                                {this.state.hasAuthedUserAnswered
+                                {hasAuthedUserAnswered
                                     ? 'View Details'
                                     : 'Answer Question'}
                             </Button>
@@ -189,6 +187,7 @@ class Question extends Component {
 function mapStateToProps({ authedUser, users }) {
     return {
         authedUserID: authedUser,
+        authedUser: getUser(authedUser, users),
         users
     }
 }

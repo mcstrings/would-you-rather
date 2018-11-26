@@ -19,7 +19,7 @@ class Login extends Component {
 
         return (
             <div>
-                <span className="welcome d-inline-flex flex-nowrap justify-content-end align-items-center">Login as&nbsp;</span>
+                <span className="welcome d-inline-flex flex-nowrap justify-content-end align-items-center">Login to play as&nbsp;</span>
 
                 <DropdownButton className="d-inline-flex" size="sm"
                     id="dropdown-users"

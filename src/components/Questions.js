@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
-import { getArrayFromObj, isAuthedUsersAnswer } from '../utils'
+import { getArrayFromObj, isAuthedUsersAnswer, isValidUserID } from '../utils'
 import {
     Badge,
     Card,
+    Jumbotron,
     ListGroup,
     ListGroupItem,
     ToggleButtonGroup,
@@ -19,9 +20,7 @@ class Questions extends Component {
     }
 
     state = {
-        showAnswered: false,
-        answered: null,
-        unanswered: null
+        showAnswered: false
     }
 
     getFilteredQuestions = (showAnswered = false) => {
@@ -51,29 +50,59 @@ class Questions extends Component {
         const { authedUserID, questions } = this.props
         const { showAnswered } = this.state
 
+        const isValidUser = isValidUserID(authedUserID)
+
         const answered = this.getFilteredQuestions(true)
         const unanswered = this.getFilteredQuestions(false)
 
         return (
             <Card className="questions mb-3 mx-3">
-                <Card.Header className="text-center">
-                    <ToggleButtonGroup
-                        className="mb-1"
-                        name="toggleAnswered"
-                        value={showAnswered ? 0 : 1}
-                        defaultValue={1}
-                        onChange={this.handleFilterChange}
-                    >
-                        <ToggleButton type="radio" value={1}>
-                            Unanswered{' '}
-                            <Badge variant="light">{unanswered.length}</Badge>
-                        </ToggleButton>
-                        <ToggleButton type="radio" value={0}>
-                            Answered{' '}
-                            <Badge variant="light">{answered.length}</Badge>
-                        </ToggleButton>
-                    </ToggleButtonGroup>
-                </Card.Header>
+                {isValidUser && (
+                    <Card.Header className="text-center">
+                        <ToggleButtonGroup
+                            className="mb-1"
+                            name="toggleAnswered"
+                            value={showAnswered ? 0 : 1}
+                            defaultValue={1}
+                            onChange={this.handleFilterChange}
+                        >
+                            <ToggleButton type="radio" value={1}>
+                                Unanswered{' '}
+                                <Badge variant="light">
+                                    {unanswered.length}
+                                </Badge>
+                            </ToggleButton>
+                            <ToggleButton type="radio" value={0}>
+                                Answered{' '}
+                                <Badge variant="light">{answered.length}</Badge>
+                            </ToggleButton>
+                        </ToggleButtonGroup>
+                    </Card.Header>
+                )}
+
+                {/* {!isValidUser && <h2>Log in to play!</h2>} */}
+
+                {isValidUser &&
+                    unanswered.length === 0 &&
+                    !showAnswered &&
+                    Object.keys(questions).length > 0 && (
+                        <Card.Body>
+                            <Jumbotron className="text-center">
+                                <h2>You've answered all of the questions!</h2>
+                            </Jumbotron>
+                        </Card.Body>
+                    )}
+
+                {isValidUser &&
+                    answered.length === 0 &&
+                    showAnswered &&
+                    Object.keys(questions).length > 0 && (
+                        <Card.Body>
+                            <Jumbotron className="text-center">
+                                <h2>You haven't answered any questions yet!</h2>
+                            </Jumbotron>
+                        </Card.Body>
+                    )}
 
                 <ListGroup variant="flush">
                     {questions &&

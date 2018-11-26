@@ -19,6 +19,7 @@ class QuestionDetail extends Component {
         const question = questions[params.id]
         const authorID = question ? question.author : ''
         const author = getUser(authorID, users)
+        const userName = getUserName(author, authedUserID)
 
         return (
             <Fragment>
@@ -37,9 +38,7 @@ class QuestionDetail extends Component {
                                 className="question-detail-avatar md"
                                 user={author}
                             />
-                            <span>
-                                {authorID === authedUserID ? "You" : getUserName(author)} created this question
-                            </span>
+                            <span>{userName} created this question</span>
                         </div>
                     </Card.Footer>
                 </Card>

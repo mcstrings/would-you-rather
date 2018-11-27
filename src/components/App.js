@@ -22,11 +22,9 @@ class App extends Component {
 
         return (
             <Container fluid className="px-0 pb-1 mx-0">
-                <LoadingBar
-                    style={{ backgroundColor: 'blue', height: '5px' }}
-                />
                 <Navigation />
-                <h3 className="d-flex justify-content-center text-white">
+                <LoadingBar className="loading" />
+                <h3 className="d-flex justify-content-center text-white mt-2">
                     Would you rather?
                 </h3>
                 <Route path="/" exact component={Questions} />

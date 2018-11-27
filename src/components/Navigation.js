@@ -12,7 +12,7 @@ class Navigation extends Component {
         const { authedUser } = this.props
 
         return (
-            <Navbar variant="dark" bg="dark" collapseOnSelect expand="sm" className="mb-3">
+            <Navbar variant="dark" bg="dark" collapseOnSelect expand="sm" className="mb-0">
                 <Navbar.Toggle />
                 <Navbar.Collapse>
                     <Nav>

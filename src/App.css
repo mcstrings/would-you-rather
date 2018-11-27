@@ -145,31 +145,38 @@
 .leaderboard-user .list-group-item {
     color: #333333;
     display: grid;
-    grid-template-columns: 74px 1fr 1fr 1fr 1fr;
+    grid-template-columns: 36px 74px 1fr 1fr 1fr 1fr;
     grid-template-rows: 50% auto;
 
     grid-template-areas:
-        'avatar username username username username'
-        'avatar asked answered answered answered';
+        'rank avatar username username username username'
+        'rank avatar asked answered answered answered';
 }
 
 .leaderboard-avatar {
-    border-radius: 50%;
     vertical-align: middle;
     margin-right: 1em;
+    box-shadow: 2px 2px 2px rgba(0,0,0, 0.4);
 
     grid-area: avatar;
 }
 
 .leaderboard-user .username {
-    color: #333333;
     font-size: 1.6em;
     grid-area: username;
 }
 
-.leaderboard-user .list-group-item.currentUser,
-.leaderboard-user .list-group-item.currentUser .username {
-    color: white;
+.leaderboard-user .currentUser {
+    color: #ffffff;
+}
+
+.leaderboard-user .list-group-item.currentUser {
+    background-color: var(--success);
+    background-image: linear-gradient(225deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25));
+}
+
+.rank {
+    grid-area: rank;
 }
 
 .asked {
@@ -189,7 +196,7 @@
 
 /* AVATAR */
 .avatar {
-    border-radius: 10%;
+    border-radius: 20%;
 }
 
 .avatar.sm {

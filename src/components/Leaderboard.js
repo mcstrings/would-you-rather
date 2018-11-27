@@ -32,25 +32,34 @@ class Leaderboard extends Component {
                     <h4 className="mb-0">Leaderboard</h4>
                 </Card.Header>
                 <ListGroup className="leaderboard-user" variant="flush">
-                    {this.sortUsersByNumQuestions().map((user) => (
+                    {this.sortUsersByNumQuestions().map((user, index) => (
                         <ListGroup.Item
                             key={user.id}
                             className={
                                 authedUserID === user.id
-                                    ? 'bg-primary currentUser'
+                                    ? 'currentUser'
                                     : ''
                             }
                         >
+                            <div className="rank d-flex align-items-center">
+                                <h2>{index + 1}</h2>
+                            </div>
                             <Avatar
                                 className="leaderboard-avatar lg"
                                 user={user}
                             />
                             <div className="username">{getUserName(user)}</div>
                             <div className="asked">
-                                <span className="callout">{this.getNumCreated(user)}</span> asked
+                                <span className="callout">
+                                    {this.getNumCreated(user)}
+                                </span>{' '}
+                                asked
                             </div>
                             <div className="answered">
-                                <span className="callout">{this.getNumAnswered(user)}</span> answered
+                                <span className="callout">
+                                    {this.getNumAnswered(user)}
+                                </span>{' '}
+                                answered
                             </div>
                         </ListGroup.Item>
                     ))}

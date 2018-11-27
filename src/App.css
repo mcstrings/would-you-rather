@@ -1,5 +1,5 @@
 .container-fluid {
-    min-width: 400px;
+    min-width: 480px;
 }
 
 #root {
@@ -133,6 +133,7 @@
     margin-right: 0.5em;
 }
 
+/* LEADERBOARD */
 .leaderboard-user {
     color: white;
     list-style: none;
@@ -145,18 +146,18 @@
 .leaderboard-user .list-group-item {
     color: #333333;
     display: grid;
-    grid-template-columns: 36px 74px 1fr 1fr 1fr 1fr;
+    grid-template-columns: 36px 74px 1fr 1fr 2fr;
     grid-template-rows: 50% auto;
 
     grid-template-areas:
-        'rank avatar username username username username'
-        'rank avatar asked answered answered answered';
+        'rank avatar username username score'
+        'rank avatar asked answered score';
 }
 
 .leaderboard-avatar {
     vertical-align: middle;
     margin-right: 1em;
-    box-shadow: 2px 2px 2px rgba(0,0,0, 0.4);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
 
     grid-area: avatar;
 }
@@ -164,6 +165,7 @@
 .leaderboard-user .username {
     font-size: 1.6em;
     grid-area: username;
+    white-space: nowrap;
 }
 
 .leaderboard-user .currentUser {
@@ -171,8 +173,12 @@
 }
 
 .leaderboard-user .list-group-item.currentUser {
-    background-color: var(--success);
-    background-image: linear-gradient(225deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25));
+    background-color: var(--primary);
+    background-image: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(0, 0, 0, 0.1)
+    );
 }
 
 .rank {
@@ -187,6 +193,38 @@
 .answered {
     grid-area: answered;
     font-size: 0.8em;
+}
+
+/* SCORE */
+.score {
+    grid-area: score;
+}
+
+.score h1 {
+    color: white;
+    margin-bottom: 0;
+}
+
+.score .badge {
+    border: solid 1px #ffffff;
+    padding-top: 8px;
+}
+
+.currentUser .score .badge {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+    border: solid 1px rgba(255, 255, 255, 0.5);
+    padding-top: 8px;
+}
+
+.score .badge hr {
+    margin: 4px 0 0 0;
+    padding: 0;
+}
+
+.badge .micro {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    padding: 0 0.5rem;
 }
 
 .callout {

@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { getUserName, getArrayFromObj } from '../utils'
 import Avatar from './Avatar'
-import { Card, ListGroup } from 'react-bootstrap'
+import { Badge, Card, ListGroup } from 'react-bootstrap'
 
 class Leaderboard extends Component {
     getNumCreated = (user) => user.questions.length
     getNumAnswered = (user) => getArrayFromObj(user.answers).length
-    getSum = (u) => this.getNumCreated(u) + this.getNumAnswered(u)
+    getSum = (user) => this.getNumCreated(user) + this.getNumAnswered(user)
 
     sortUsersByNumQuestions = () => {
         const { users } = this.props
@@ -36,9 +36,7 @@ class Leaderboard extends Component {
                         <ListGroup.Item
                             key={user.id}
                             className={
-                                authedUserID === user.id
-                                    ? 'currentUser'
-                                    : ''
+                                authedUserID === user.id ? 'currentUser' : ''
                             }
                         >
                             <div className="rank d-flex align-items-center">
@@ -60,6 +58,13 @@ class Leaderboard extends Component {
                                     {this.getNumAnswered(user)}
                                 </span>{' '}
                                 answered
+                            </div>
+                            <div className="score">
+                                <Badge variant="primary">
+                                    <span className="micro">SCORE</span>
+                                    <hr></hr>
+                                    <h1>{this.getSum(user)}</h1>
+                                </Badge>
                             </div>
                         </ListGroup.Item>
                     ))}

@@ -232,6 +232,34 @@
     font-weight: 500;
 }
 
+.star {
+    color: var(--warning);
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    margin-left: -14px;
+    margin-top: -13px;
+    animation: rotateStar 1s ease-in-out;
+    transition: transform 1s ease-in-out;
+    transform: rotate(-15deg);
+}
+
+.star:hover {
+    transform: rotate(540deg);
+}
+
+@keyframes rotateStar {
+    0% {
+        transform: rotate(0);
+    }
+    50% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(-15deg);
+    }
+}
+
 /* AVATAR */
 .avatar {
     border-radius: 20%;

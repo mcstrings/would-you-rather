@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { MdStars, MdStar } from 'react-icons/md'
 import { withRouter } from 'react-router-dom'
 import { getUserName, getArrayFromObj } from '../utils'
 import Avatar from './Avatar'
@@ -60,9 +61,10 @@ class Leaderboard extends Component {
                                 answered
                             </div>
                             <div className="score">
+                                {index === 0 && <MdStar className="star" />}
                                 <Badge variant="primary">
                                     <span className="micro">SCORE</span>
-                                    <hr></hr>
+                                    <hr />
                                     <h1>{this.getSum(user)}</h1>
                                 </Badge>
                             </div>

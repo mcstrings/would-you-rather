@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { getArrayFromObj } from '../utils'
-import { Label } from 'react-bootstrap'
 
 export default class OptionStats extends Component {
     render() {
@@ -24,7 +23,8 @@ export default class OptionStats extends Component {
                     chose this option.
                 </li>
                 <li className="answered">
-                    <span className="callout">{percentage}%</span> voted for this option.
+                    <span className="callout">{percentage}%</span> voted for
+                    this option.
                 </li>
             </ul>
         )

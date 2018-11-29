@@ -16,7 +16,7 @@ export default function questions(state = {}, action) {
             const { question } = action
 
             return {
-                ...state, // state.questions?
+                ...state, // state.questions
                 [question.id]: question
             }
 

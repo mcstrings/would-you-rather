@@ -15,9 +15,9 @@ export const handleInitialData = () => {
 
     return async (dispatch) => {
         const AUTHED_USER_ID = ''
+        
         dispatch(showLoading())
         const [users, questions] = await getUsersAndQuestions()
-
         dispatch(receiveUsers(users))
         dispatch(receiveQuestions(questions))
         dispatch(setAuthedUser(AUTHED_USER_ID))

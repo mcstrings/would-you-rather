@@ -6,15 +6,15 @@ import { DropdownButton, Dropdown } from 'react-bootstrap'
 import { handleSetAuthedUser } from '../actions/authedUser'
 import Avatar from './Avatar'
 class Login extends Component {
-    handleSelectUserChange = (value, e) => {
+
+    handleSelectUserChange = (value) => {
         const { dispatch, history } = this.props
         dispatch(handleSetAuthedUser(value))
         history.push("/")
     }
 
     render() {
-        const { authedUserID, users, user } = this.props
-
+        const { users, user } = this.props
         const title = user ? user.name : 'Select a user'
 
         return (
@@ -25,7 +25,6 @@ class Login extends Component {
                     id="dropdown-users"
                     variant="success"
                     alignRight={true}
-                    value={authedUserID}
                     title={title}
                     onSelect={this.handleSelectUserChange}
                 >
@@ -41,7 +40,7 @@ class Login extends Component {
                                     : 0
                             })
                             .map((user) => (
-                                <Dropdown.Item key={user.id} eventKey={user.id}>
+                                <Dropdown.Item active={false} key={user.id} eventKey={user.id}>
                                     <Avatar className={"dropdown-user-avatar sm"} user={user} /> {user.name}
                                 </Dropdown.Item>
                             ))}

@@ -13,36 +13,54 @@ import NewQuestion from './NewQuestion'
 import PageNotFound from './PageNotFound'
 
 class App extends Component {
-    componentDidMount() {
-        this.props.dispatch(handleInitialData())
+    state = {
+        isLoading: true
+    }
+
+    async componentDidMount() {
+        await this.props.dispatch(handleInitialData())
+        this.setState({
+            isLoading: false
+        })
     }
 
     render() {
         const { authedUser } = this.props
+        const { isLoading } = this.state
 
         return (
             <Container fluid className="px-0 pb-1 mx-0">
                 <Navigation />
-                <LoadingBar className="loading" />
+                <LoadingBar className="loading" showFastActions />
+
                 <h3 className="d-flex justify-content-center text-white mt-2">
                     Would you rather?
                 </h3>
-                <Route path="/" exact component={Questions} />
+
+                <Route
+                    path="/"
+                    exact
+                    render={(props) => <Questions isLoading={isLoading} />}
+                />
+
                 <PrivateRoute
                     path="/add"
                     component={NewQuestion}
                     authedUser={authedUser}
                 />
+
                 <PrivateRoute
                     path="/leaderboard"
                     component={Leaderboard}
                     authedUser={authedUser}
                 />
+
                 <PrivateRoute
                     path="/question-detail/:id"
                     component={QuestionDetail}
                     authedUser={authedUser}
                 />
+
                 <Route path="/404" component={PageNotFound} />
             </Container>
         )

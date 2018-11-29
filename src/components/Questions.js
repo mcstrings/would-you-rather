@@ -20,15 +20,15 @@ class Questions extends Component {
     }
 
     state = {
-        showAnswered: false
+        isShowingAnswered: false
     }
 
-    getFilteredQuestions = (showAnswered = false) => {
+    getFilteredQuestions = (isShowingAnswered = false) => {
         const { authedUserID, questions } = this.props
 
         const filteredQuestions = getArrayFromObj(questions).filter(
             (question) =>
-                showAnswered ===
+                isShowingAnswered ===
                 (isAuthedUsersAnswer(question.optionOne, authedUserID) ||
                     isAuthedUsersAnswer(question.optionTwo, authedUserID))
         )
@@ -42,16 +42,16 @@ class Questions extends Component {
 
     handleFilterChange = (value, e) => {
         this.setState({
-            showAnswered: value ? false : true // relying on truthiness
+            ...this.state,
+            isShowingAnswered: value ? false : true // relying on truthiness
         })
     }
 
     render() {
-        const { authedUserID, questions } = this.props
-        const { showAnswered } = this.state
+        const { authedUserID, questions, isLoading } = this.props
+        const { isShowingAnswered } = this.state
 
         const isValidUser = isValidUserID(authedUserID)
-
         const answered = this.getFilteredQuestions(true)
         const unanswered = this.getFilteredQuestions(false)
 
@@ -62,7 +62,7 @@ class Questions extends Component {
                         <ToggleButtonGroup
                             className="mb-1"
                             name="toggleAnswered"
-                            value={showAnswered ? 0 : 1}
+                            value={isShowingAnswered ? 0 : 1}
                             defaultValue={1}
                             onChange={this.handleFilterChange}
                         >
@@ -80,11 +80,9 @@ class Questions extends Component {
                     </Card.Header>
                 )}
 
-                {/* {!isValidUser && <h2>Log in to play!</h2>} */}
-
                 {isValidUser &&
                     unanswered.length === 0 &&
-                    !showAnswered &&
+                    !isShowingAnswered &&
                     Object.keys(questions).length > 0 && (
                         <Card.Body>
                             <Jumbotron className="text-center">
@@ -95,7 +93,7 @@ class Questions extends Component {
 
                 {isValidUser &&
                     answered.length === 0 &&
-                    showAnswered &&
+                    isShowingAnswered &&
                     Object.keys(questions).length > 0 && (
                         <Card.Body>
                             <Jumbotron className="text-center">
@@ -104,9 +102,11 @@ class Questions extends Component {
                         </Card.Body>
                     )}
 
+                {isLoading && <div className="loader" />}
+
                 <ListGroup variant="flush">
                     {questions &&
-                        this.getFilteredQuestions(showAnswered).map(
+                        this.getFilteredQuestions(isShowingAnswered).map(
                             (question) => (
                                 <ListGroupItem key={question.id}>
                                     <Question

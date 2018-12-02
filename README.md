@@ -1,5 +1,7 @@
 # Would You Rather Project
 
+"Would you rather?" is a simple app (with development emphasis on Redux) based on the party game. Users can answer and add questions.
+
 ## TL;DR
 To get started:
 

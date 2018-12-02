@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { isAuthedUsersAnswer } from '../utils'
+import { isAuthedUsersAnswer, isValidUserID } from '../utils'
 import { MdCheckBox, MdCheckBoxOutlineBlank } from 'react-icons/md'
 import { Button, Container, Form, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
@@ -53,14 +53,9 @@ class Question extends Component {
     }
 
     componentDidMount = () => {
-        const {
-            authedUserID,
-            question: { optionOne, optionTwo }
-        } = this.props
+        const { authedUserID, question } = this.props
 
-        const hasAuthedUserAnswered =
-            isAuthedUsersAnswer(optionOne, authedUserID) ||
-            isAuthedUsersAnswer(optionTwo, authedUserID)
+        const hasAuthedUserAnswered = this.getHasAuthedUserAnswered(question)
 
         this.setState({
             ...this.state,
@@ -68,6 +63,16 @@ class Question extends Component {
                 authedUserID && !hasAuthedUserAnswered && this.props.withForm,
             hasAuthedUserAnswered
         })
+    }
+
+    getHasAuthedUserAnswered = (question) => {
+        const { optionOne, optionTwo } = question
+        const { authedUserID } = this.props
+
+        return (
+            isAuthedUsersAnswer(optionOne, authedUserID) ||
+            isAuthedUsersAnswer(optionTwo, authedUserID)
+        )
     }
 
     render() {
@@ -79,7 +84,9 @@ class Question extends Component {
             withDetailsButton = false
         } = this.props
 
-        const { answer, showForm, hasAuthedUserAnswered } = this.state
+        const { answer, showForm } = this.state
+
+        const hasAuthedUserAnswered = this.getHasAuthedUserAnswered(question)
 
         const user = getUser(question.author, users)
 
@@ -111,7 +118,9 @@ class Question extends Component {
                                     showForm={showForm}
                                     option={question.optionOne}
                                     answer={'optionOne'}
-                                    hasAuthedUserAnswered={hasAuthedUserAnswered}
+                                    hasAuthedUserAnswered={
+                                        hasAuthedUserAnswered
+                                    }
                                     handleRadioBtnClick={
                                         this.handleRadioBtnClick
                                     }
@@ -135,7 +144,9 @@ class Question extends Component {
                                     showForm={showForm}
                                     option={question.optionTwo}
                                     answer={'optionTwo'}
-                                    hasAuthedUserAnswered={hasAuthedUserAnswered}
+                                    hasAuthedUserAnswered={
+                                        hasAuthedUserAnswered
+                                    }
                                     handleRadioBtnClick={
                                         this.handleRadioBtnClick
                                     }
@@ -160,24 +171,26 @@ class Question extends Component {
                     )}
 
                     {/* Detail Page Button */}
-                    {!showForm && authedUserID && withDetailsButton && (
-                        <div className="text-center">
-                            <Button
-                                variant={
-                                    hasAuthedUserAnswered
-                                        ? 'primary'
-                                        : 'success'
-                                }
-                                className="btn-sm btn-block"
-                                as={Link}
-                                to={`/question-detail/${question.id}`}
-                            >
-                                {hasAuthedUserAnswered
-                                    ? 'View Details'
-                                    : 'Answer Question'}
-                            </Button>
-                        </div>
-                    )}
+                    {!showForm &&
+                        isValidUserID(authedUserID) &&
+                        withDetailsButton && (
+                            <div className="text-center">
+                                <Button
+                                    variant={
+                                        hasAuthedUserAnswered
+                                            ? 'primary'
+                                            : 'success'
+                                    }
+                                    className="btn-sm btn-block"
+                                    as={Link}
+                                    to={`/question-detail/${question.id}`}
+                                >
+                                    {hasAuthedUserAnswered
+                                        ? 'View Details'
+                                        : 'Answer Question'}
+                                </Button>
+                            </div>
+                        )}
                 </Container>
             </ListGroup.Item>
         )

@@ -26,6 +26,10 @@ class Questions extends Component {
     getFilteredQuestions = (isShowingAnswered = false) => {
         const { authedUserID, questions } = this.props
 
+        if(!isValidUserID(authedUserID)){
+            return this.sortQuestions(getArrayFromObj(questions))
+        }
+
         const filteredQuestions = getArrayFromObj(questions).filter(
             (question) =>
                 isShowingAnswered ===
@@ -40,7 +44,7 @@ class Questions extends Component {
         return questions.sort((a, b) => b.timestamp - a.timestamp)
     }
 
-    handleFilterChange = (value, e) => {
+    handleFilterChange = (value) => {
         this.setState({
             ...this.state,
             isShowingAnswered: value ? false : true // relying on truthiness

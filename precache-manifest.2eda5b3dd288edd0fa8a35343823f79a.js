@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "/would-you-rather/static/css/1.2ba0183c.chunk.css"
   },
   {
-    "revision": "c354b6da8ecf1b6f5427c0b94c3230e0",
+    "revision": "004ded6fb800a12147b1a2d09f02899b",
     "url": "/would-you-rather/index.html"
   }
 ];

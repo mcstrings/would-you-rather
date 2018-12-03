@@ -11,6 +11,7 @@ import Leaderboard from './Leaderboard'
 import QuestionDetail from './QuestionDetail'
 import NewQuestion from './NewQuestion'
 import PageNotFound from './PageNotFound'
+import Login from './Login'
 
 class App extends Component {
     state = {
@@ -26,7 +27,6 @@ class App extends Component {
 
     render() {
         const { authedUser } = this.props
-        const { isLoading } = this.state
 
         return (
             <Container fluid className="px-0 pb-1 mx-0">
@@ -37,11 +37,14 @@ class App extends Component {
                     Would you rather?
                 </h3>
 
-                <Route
+                <PrivateRoute
                     path="/"
                     exact
-                    render={(props) => <Questions isLoading={isLoading} />}
+                    component={Questions}
+                    authedUser={authedUser}
                 />
+
+                <Route path="/login" component={Login} />
 
                 <PrivateRoute
                     path="/add"
@@ -55,6 +58,7 @@ class App extends Component {
                     authedUser={authedUser}
                 />
 
+                {/* TODO: The path should be questions/:question_id */}
                 <PrivateRoute
                     path="/question-detail/:id"
                     component={QuestionDetail}
@@ -78,7 +82,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
                     authedUser.length > 0 ? (
                     <Component {...props} />
                 ) : (
-                    <Redirect to="/404" />
+                    <Redirect
+                        to={{
+                            pathname: '/login',
+                            state: { from: props.location }
+                        }}
+                    />
                 )
             }}
         />

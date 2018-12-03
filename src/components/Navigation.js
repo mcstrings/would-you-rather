@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { withRouter } from 'react-router-dom'
 import Welcome from './Welcome'
-import Login from './Login'
 import { Navbar, Nav } from 'react-bootstrap'
 import { getUser } from '../utils'
 
@@ -30,7 +29,7 @@ class Navigation extends Component {
                     </Nav>
                 </Navbar.Collapse>
                 <Nav>
-                    {authedUser ? <Welcome /> : <Login />}
+                    {authedUser && <Welcome />}
                 </Nav>
             </Navbar>
         )

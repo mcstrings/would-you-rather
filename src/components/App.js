@@ -14,15 +14,8 @@ import PageNotFound from './PageNotFound'
 import Login from './Login'
 
 class App extends Component {
-    state = {
-        isLoading: true
-    }
-
-    async componentDidMount() {
-        await this.props.dispatch(handleInitialData())
-        this.setState({
-            isLoading: false
-        })
+    componentDidMount() {
+        this.props.dispatch(handleInitialData())
     }
 
     render() {

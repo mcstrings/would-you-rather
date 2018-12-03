@@ -87,10 +87,9 @@ class NewQuestion extends Component {
     }
 }
 
-const mapStateToProps = ({ authedUser, users }) => {
+const mapStateToProps = ({ authedUser }) => {
     return {
-        authedUserID: authedUser,
-        user: getUser(authedUser, users)
+        authedUserID: authedUser
     }
 }
 

@@ -26,7 +26,7 @@ class Questions extends Component {
     getFilteredQuestions = (isShowingAnswered = false) => {
         const { authedUserID, questions } = this.props
 
-        if(!isValidUserID(authedUserID)){
+        if (!isValidUserID(authedUserID)) {
             return this.sortQuestions(getArrayFromObj(questions))
         }
 
@@ -52,7 +52,7 @@ class Questions extends Component {
     }
 
     render() {
-        const { authedUserID, questions, isLoading } = this.props
+        const { authedUserID, questions } = this.props
         const { isShowingAnswered } = this.state
 
         const isValidUser = isValidUserID(authedUserID)
@@ -105,8 +105,6 @@ class Questions extends Component {
                             </Jumbotron>
                         </Card.Body>
                     )}
-
-                {isLoading && <div className="loader" />}
 
                 <ListGroup variant="flush">
                     {questions &&

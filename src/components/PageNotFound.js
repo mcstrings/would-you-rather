@@ -9,7 +9,7 @@ export default class PageNotFound extends Component {
                 <span className="display-1 text-danger">404</span>
                 <hr />
                 <p className="display-4">
-                    You have to be logged in to view this page.
+                    There was an error getting the requested URL.
                 </p>
             </Jumbotron>
         )

@@ -183,7 +183,7 @@ class Question extends Component {
                                     }
                                     className="btn-sm btn-block"
                                     as={Link}
-                                    to={`/question-detail/${question.id}`}
+                                    to={`/questions/${question.id}`}
                                 >
                                     {hasAuthedUserAnswered
                                         ? 'View Details'

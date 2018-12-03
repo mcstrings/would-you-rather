@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Container } from 'react-bootstrap'
-import { Route, withRouter, Redirect } from 'react-router-dom'
+import { Route, withRouter, Redirect, Switch } from 'react-router-dom'
 import LoadingBar from 'react-redux-loading-bar'
 import '../App.css'
 import { handleInitialData } from '../actions/shared'
@@ -37,35 +37,39 @@ class App extends Component {
                     Would you rather?
                 </h3>
 
-                <PrivateRoute
-                    path="/"
-                    exact
-                    component={Questions}
-                    authedUser={authedUser}
-                />
+                <Switch>
+                    <PrivateRoute
+                        path="/"
+                        exact
+                        component={Questions}
+                        authedUser={authedUser}
+                    />
+    
+                    <Route path="/login" component={Login} />
+    
+                    <PrivateRoute
+                        path="/add"
+                        component={NewQuestion}
+                        authedUser={authedUser}
+                    />
+    
+                    <PrivateRoute
+                        path="/leaderboard"
+                        component={Leaderboard}
+                        authedUser={authedUser}
+                    />
+    
+                    {/* TODO: The path should be questions/:question_id */}
+                    <PrivateRoute
+                        path="/questions/:question_id"
+                        component={QuestionDetail}
+                        authedUser={authedUser}
+                    />
+    
+                    <Route path="/404" component={PageNotFound} />
 
-                <Route path="/login" component={Login} />
-
-                <PrivateRoute
-                    path="/add"
-                    component={NewQuestion}
-                    authedUser={authedUser}
-                />
-
-                <PrivateRoute
-                    path="/leaderboard"
-                    component={Leaderboard}
-                    authedUser={authedUser}
-                />
-
-                {/* TODO: The path should be questions/:question_id */}
-                <PrivateRoute
-                    path="/question-detail/:id"
-                    component={QuestionDetail}
-                    authedUser={authedUser}
-                />
-
-                <Route path="/404" component={PageNotFound} />
+                    <Route component={PageNotFound} />
+                </Switch>
             </Container>
         )
     }

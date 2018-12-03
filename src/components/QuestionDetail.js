@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Redirect, withRouter } from 'react-router-dom'
 import { Card } from 'react-bootstrap'
 import Avatar from './Avatar'
 import Question from './Question'
@@ -16,7 +16,10 @@ class QuestionDetail extends Component {
         } = this.props
 
         // Get question and author (not to be confused with the authenticated user)
-        const question = questions[params.id]
+        const question = questions[params.question_id]
+
+        if(question === undefined) return <Redirect to="/404" />
+
         const authorID = question ? question.author : ''
         const author = getUser(authorID, users)
         const userName = getUserName(author, authedUserID)

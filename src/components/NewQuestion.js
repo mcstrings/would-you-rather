@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Button, ButtonToolbar, Container, Form, Card } from 'react-bootstrap'
-import { getUser } from '../utils'
 import { handleAddQuestion } from '../actions/questions'
 
 class NewQuestion extends Component {

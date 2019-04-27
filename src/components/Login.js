@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Card, Container } from 'react-bootstrap'
 import { getArrayFromObj, getUser } from '../utils'
 import { DropdownButton, Dropdown } from 'react-bootstrap'
-import { handleSetAuthedUser } from '../actions/authedUser'
+import { authedUserAction } from '../store/authedUser'
 import Avatar from './Avatar'
 class Login extends Component {
     state = {
@@ -13,7 +13,7 @@ class Login extends Component {
 
     handleSelectUserChange = async (value) => {
         const { dispatch } = this.props
-        await dispatch(handleSetAuthedUser(value))
+        await dispatch(authedUserAction(value))
         this.setState({
             redirectToReferrer: true
         })

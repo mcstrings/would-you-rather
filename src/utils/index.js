@@ -1,4 +1,4 @@
-export const getUser = (userID = '', users) => {
+export const getUser = (userID = '', users = {}) => {
     const user = users[userID]
     return user ? user : undefined
 }

@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 import { getUser, getUserName } from '../utils'
 import Avatar from './Avatar'
 import { Button } from 'react-bootstrap'
-import { handleSetAuthedUser } from '../actions/authedUser'
+import { authedUserAction } from '../store/authedUser'
 import { withRouter } from 'react-router-dom'
 class Welcome extends Component {
     handleLogout = (e) => {
         e.preventDefault()
         const { dispatch, history } = this.props
-        dispatch(handleSetAuthedUser(''))
+        dispatch(authedUserAction(''))
         history.push("/")
     }
 

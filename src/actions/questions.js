@@ -1,27 +1,8 @@
 import { _saveQuestion, _saveQuestionAnswer } from '../api/_DATA'
-import { handleUpdateUserQuestions, handleUpdateUserAnswers } from './users'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-export const SAVE_QUESTION = 'SAVE_QUESTION'
-export const SAVE_QUESTION_ANSWER = 'SAVE_QUESTION_ANSWER'
-
-export const receiveQuestions = (questions) => ({
-    type: RECEIVE_QUESTIONS,
-    questions
-})
-
-export const saveQuestion = (question) => ({
-    type: SAVE_QUESTION,
-    question
-})
-
-export const saveQuestionAnswer = (authedUserID, question, answer) => ({
-    type: SAVE_QUESTION_ANSWER,
-    uid: authedUserID,
-    qid: question.id,
-    answer
-})
+import { updateUserQuestionsAction, updateUserAnswersAction } from '../store/users'
+import { saveQuestionAction, saveQuestionAnswerAction } from '../store/questions'
 
 export const handleSaveQuestionAnswer = (authedUserID, question, answer) => {
     return async (dispatch) => {
@@ -36,10 +17,10 @@ export const handleSaveQuestionAnswer = (authedUserID, question, answer) => {
             })
 
             // Update state
-            await dispatch(saveQuestionAnswer(authedUserID, question, answer))
-            await dispatch(handleUpdateUserAnswers(authedUserID, question, answer))
+            await dispatch(saveQuestionAnswerAction({ authedUserID, question, answer }))
+            await dispatch(updateUserAnswersAction({ authedUserID, question, answer }))
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
 
         dispatch(hideLoading())
@@ -51,10 +32,10 @@ export const handleAddQuestion = (question) => {
         dispatch(showLoading())
         try {
             const newQuestion = await _saveQuestion(question) // api call
-            await dispatch(saveQuestion(newQuestion)) // dispatch the action
-            await dispatch(handleUpdateUserQuestions(newQuestion)) // add the question to the user
+            await dispatch(saveQuestionAction(newQuestion)) // dispatch the action
+            await dispatch(updateUserQuestionsAction(newQuestion))
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
         dispatch(hideLoading())
     }

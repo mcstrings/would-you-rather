@@ -2,6 +2,8 @@
 
 "Would you rather?" is a simple app (with development emphasis on Redux) based on the party game. Users can answer and add questions.
 
+This was one of the projects from Udacity's React JS class. The following is mainly the project specifications.
+
 ## TL;DR
 To get started:
 
